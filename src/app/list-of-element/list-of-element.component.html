@@ -1,0 +1,24 @@
+<div class="box">
+  <ul class="list" cdkDropList>
+    <li
+      *ngFor="let el of elements"
+      (click) = "onSelected(el)"
+      class="list__item"
+    >
+      <button cdkDrag *ngIf="el.name === 'button'">Button</button>
+      <textarea *ngIf="el.name === 'textarea'" cols="30" rows="10" cdkDrag></textarea>
+      <input *ngIf="el.name === 'input'" type="text" cdkDrag>
+      <label for="checkBox" cdkDrag>
+        <input *ngIf="el.name === 'checkbox'" type="checkbox" id="checkBox" cdkDrag>
+      </label>
+      <select *ngIf="el.name === 'select'" cdkDrag>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select>
+    </li>
+  </ul>
+</div>
+<app-info-element [element]="selectedElement"></app-info-element>
