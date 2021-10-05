@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="registration">
+    <h3 class="registration__title">
+      Sing in
+    </h3>
+    <input
+      type="email"
+      class="registration__field"
+      placeholder="Enter your email"
+      [(ngModel)]="loginUserData.email"
+      name="email"
+    >
+    <input
+      type="password"
+      class="registration__field"
+      placeholder="Enter password"
+      [(ngModel)]="loginUserData.password"
+      name="password"
+    >
+    <button class="btn btn--submit" (click)="loginUser()">Login</button>
+  </div>
+</div>

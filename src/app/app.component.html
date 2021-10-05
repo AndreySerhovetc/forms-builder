@@ -1,18 +1,20 @@
 <header class="header">
-  <a href="/" class="header__link">Builder</a>
+  <a [routerLink]="['/']" class="header__link">Builder</a>
   <div class="nav-link">
-    <a class="nav-link__btn">Registration</a>
-    <a class="nav-link__btn">Sing-in</a>
+    <a
+      [routerLink]="['/registration']"
+      class="nav-link__btn"
+      routerLinkActive="active"
+    >
+      Registration
+    </a>
+    <a
+      [routerLink]="['/singin']"
+      class="nav-link__btn"
+      routerLinkActive="active"
+    >
+      Sing-in
+    </a>
   </div>
 </header>
-<main class="main">
-  <section class="info">
-    <app-info-element></app-info-element>
-  </section>
-  <section class="drop-field">
-  <app-drop-field></app-drop-field>
-  </section>
-  <section class="list-elements">
-    <app-list-of-element></app-list-of-element>
-  </section>
-</main>
+<router-outlet></router-outlet>

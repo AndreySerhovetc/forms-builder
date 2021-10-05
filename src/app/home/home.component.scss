@@ -1,0 +1,15 @@
+.main {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  padding: 20px;
+}
+
+.info {
+  flex-grow: 1;
+}
+
+.drop-field {
+  flex-grow: 1;
+  border: 1px solid #fd974f;
+}
