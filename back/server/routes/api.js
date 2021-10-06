@@ -1,4 +1,5 @@
 const express = require('express');
+const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
 const User = require('../models/users');
 const router = express.Router();
@@ -20,13 +21,15 @@ router.post('/register', (req, res) => {
   let userData = req.body;
   let user = new User(userData);
 
-  user.save((error, registeredUser) =>{
-    if(error) {
-      console.error(error);
-    }else {
-      res.status(200).send(registeredUser)
-    }
-  })
+    user.save((error, registeredUser) => {
+      if (error) {
+        console.error(error);
+      } else {
+        let payload = { subject: registeredUser._id }
+        let token = jwt.sign(payload, 'secretKey')
+        res.status(200).send({ token })
+      }
+    })
 })
 
 router.post('/login', (req, res) => {
@@ -42,7 +45,9 @@ router.post('/login', (req, res) => {
         if (user.password !== userData.password) {
           res.status(401).send('Invalid password')
         } else {
-          res.status(200).send(user)
+          let payload = { subject: user._id }
+          let token = jwt.sign(payload, 'secretKey')
+          res.status(200).send({ token })
         }
       }
     }

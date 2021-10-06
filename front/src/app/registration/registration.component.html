@@ -1,22 +1,74 @@
 <div class="container">
   <div class="registration">
+    <span>{{successMsg}}</span>
+    <span>{{errorMsg}}</span>
     <h3 class="registration__title">
       Registration
     </h3>
-    <input
-      type="email"
-      class="registration__field"
-      placeholder="Enter your email"
-      [(ngModel)]="registerUserData.email"
-      name="email"
-    >
-    <input
-      type="password"
-      class="registration__field"
-      placeholder="Enter password"
-      [(ngModel)]="registerUserData.password"
-      name="password"
-    >
-    <button class="btn btn--submit" (click)="registerUser()">Submit</button>
+    <form class="form" [formGroup]="registForm" (ngSubmit)="onSubmit()">
+      <div class="form-control">
+        <label>
+          <input
+            type="email"
+            class="registration__field"
+            placeholder="Enter your email"
+            formControlName="email"
+            name="email"
+          >
+        </label>
+        <div
+          *ngIf="registForm.get('email').invalid && registForm.get('email').touched"
+          class="validation"
+        >
+          <small
+            *ngIf="registForm.get('email').errors.required"
+            class="error"
+          >
+            Field email can't by empty
+          </small>
+          <small
+            *ngIf="registForm.get('email').errors.email"
+            class="error"
+          >
+            Enter the correct email (test@gmail.com)
+          </small>
+        </div>
+      </div>
+      <div class="form-control">
+        <label for="">
+          <input
+            type="password"
+            class="registration__field"
+            placeholder="Enter password"
+            formControlName="password"
+            name="password"
+          >
+        </label>
+        <div
+          *ngIf="registForm.get('password').invalid && registForm.get('password').touched"
+          class="validation"
+        >
+          <small
+            *ngIf="registForm.get('password').errors.required"
+            class="error"
+          >
+            Field password can't by empty
+          </small>
+          <small
+            *ngIf="registForm.get('password').errors.minlength"
+            class="error"
+          >
+            Password length must be at least 6 characters
+          </small>
+        </div>
+      </div>
+    <button
+      class="btn btn--submit"
+      type="submit"
+      [disabled]="registForm.invalid"
+      >
+        Submit
+      </button>
+    </form>
   </div>
 </div>

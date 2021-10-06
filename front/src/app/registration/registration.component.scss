@@ -26,16 +26,18 @@
 
   &__field {
     padding: 10px;
-    width: 250px;
+    width: 350px;
     font-size: 16px;
     border-radius: 10px;
     border: none;
-    margin-bottom: 20px;
-
     transition: border .3s ease;
 
-    &:last-child {
-      margin-bottom: 0;
+    &.ng-invalid.ng-touched {
+      border: 2px solid red;
+    }
+
+    &.ng-valid.ng-touched {
+      border: 2px solid green;
     }
 
     &:hover {
@@ -52,4 +54,19 @@
       font-size: 14px;
     }
   }
+}
+
+.form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  &-control {
+    margin-bottom: 20px;
+  }
+}
+
+.error {
+  color: red;
+  font-weight: bold;
 }
