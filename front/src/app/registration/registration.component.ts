@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 
 @Component({
@@ -18,7 +19,10 @@ export class RegistrationComponent implements OnInit {
     password: ''
   }
 
-  constructor(private auth: AuthService) { }
+  constructor(
+    private auth: AuthService,
+    private route: Router
+    ) { }
 
   ngOnInit(): void {
     this.registForm = new FormGroup({
@@ -47,7 +51,6 @@ export class RegistrationComponent implements OnInit {
       this.registerUserData.password = formData.password;
 
       this.registerUser();
-      this.registForm.reset();
     }
   }
 
@@ -57,9 +60,10 @@ export class RegistrationComponent implements OnInit {
         res => {
           localStorage.setItem('token', res.token)
           this.successMsg = "Registration successful"
+          this.registForm.reset();
+          this.route.navigate(['']);
         },
-
-        error => this.errorMsg = error.error 
+        error => this.errorMsg = error.error
       )
   }
 }

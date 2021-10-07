@@ -1,7 +1,22 @@
 <div class="container">
+  <div
+    *ngIf="successMsg || errorMsg"
+    class="show-mess"
+  >
+    <span
+      *ngIf="successMsg"
+      class="success-msg"
+    >
+      {{successMsg}}
+    </span>
+    <span
+      *ngIf="errorMsg"
+      class="error-msg"
+    >
+      {{errorMsg}}
+    </span>
+  </div>
   <div class="registration">
-    <span>{{successMsg}}</span>
-    <span>{{errorMsg}}</span>
     <h3 class="registration__title">
       Registration
     </h3>

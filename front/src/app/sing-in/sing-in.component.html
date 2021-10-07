@@ -1,4 +1,15 @@
 <div class="container">
+  <div
+    *ngIf="successMsg || currentErr"
+    class="show-mess"
+  >
+    <span
+      *ngIf="successMsg"
+      class="success-msg">{{successMsg}}</span>
+    <span
+      *ngIf="currentErr"
+      class="error-msg">{{currentErr}}</span>
+  </div>
   <div class="registration">
     <h3 class="registration__title">
       Login
@@ -67,8 +78,6 @@
       >
         Submit
       </button>
-      <span>{{ currentErr }}</span>
-      <span>{{ successMsg }}</span>
     </form>
   </div>
 </div>

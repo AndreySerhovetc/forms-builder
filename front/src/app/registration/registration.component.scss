@@ -66,6 +66,32 @@
   }
 }
 
+.show-mess {
+  position: absolute;
+  top: 60px;
+  left:0;
+  display: block;
+  width: 100%;
+}
+
+.success-msg {
+  display: block;
+  font-size: 18px;
+  text-align: center;
+  padding: 20px 0;
+  background-color: green;
+  color: #fff
+}
+
+.error-msg {
+  display: block;
+  font-size: 18px;
+  text-align: center;
+  padding: 20px 0;
+  background-color: red;
+  color: #fff
+}
+
 .error {
   color: red;
   font-weight: bold;

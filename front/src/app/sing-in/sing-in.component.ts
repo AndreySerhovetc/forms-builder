@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 @Component({
   selector: 'app-sing-in',
@@ -17,7 +18,10 @@ export class SingInComponent implements OnInit {
     password:''
   }
 
-  constructor(private auth: AuthService) { }
+  constructor(
+    private auth: AuthService,
+    private route: Router
+    ) { }
 
   ngOnInit(): void {
     this.loginForm = new FormGroup({
@@ -34,6 +38,7 @@ export class SingInComponent implements OnInit {
     this.loginForm.valueChanges.subscribe(
       res => {
         if (this.currentErr.length) this.currentErr = '';
+        if (this.successMsg.length) this.successMsg = '';
       }
     )
   }
@@ -46,7 +51,6 @@ export class SingInComponent implements OnInit {
       this.loginUserData.password = formData.password;
 
       this.loginUser();
-      this.loginForm.reset();
     }
   }
 
@@ -54,10 +58,14 @@ export class SingInComponent implements OnInit {
     this.auth.loginUser(this.loginUserData)
       .subscribe(
         res => {
-          localStorage.setItem('token', res.token)
-          this.successMsg = "You successful logged in"
+          localStorage.setItem('token', res.token);
+          this.successMsg = "You successful logged in";
+          this.route.navigate([''])
         },
-        err => this.currentErr = err.error
+        err => {
+          this.loginForm.get('password')?.setValue('');
+          this.currentErr = err.error;
+        }
       )
   }
 }

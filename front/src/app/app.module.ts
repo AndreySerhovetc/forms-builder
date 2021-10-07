@@ -15,7 +15,6 @@ import { ErrorPageComponent } from './error-page/error-page.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from './auth.service';
 import { TokenInterceptorService } from './token-interceptor.service';
-
 @NgModule({
   declarations: [
     AppComponent,
