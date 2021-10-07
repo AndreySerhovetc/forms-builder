@@ -15,6 +15,12 @@ import { ErrorPageComponent } from './error-page/error-page.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from './auth.service';
 import { TokenInterceptorService } from './token-interceptor.service';
+import { StoreModule } from '@ngrx/store';
+import { reducers, metaReducers } from '../reducers';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
+import { EffectsModule } from '@ngrx/effects';
+import {CdkAccordionModule} from '@angular/cdk/accordion';
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,7 +39,13 @@ import { TokenInterceptorService } from './token-interceptor.service';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    DragDropModule
+    CdkAccordionModule,
+    DragDropModule,
+    StoreModule.forRoot(reducers, {
+      metaReducers
+    }),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+    EffectsModule.forRoot([])
   ],
   providers: [AuthService,
     {

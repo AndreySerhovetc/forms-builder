@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { addSelectElement } from 'src/reducers/selectedElement';
 import { Element } from '../Element';
 import { ElementService } from '../element.service';
 
@@ -15,19 +17,21 @@ export class ListOfElementComponent implements OnInit {
   elements: Element[] = [];
   selectedElement?: Element;
 
-  onSelected(element: Element): void {
-    this.selectedElement = element;
-  }
-
   getElements(): void {
     this.elementService.getElements()
       .subscribe(elements => this.elements = elements)
   }
 
-  constructor(private elementService: ElementService) { }
+  constructor(
+    private elementService: ElementService,
+    private store: Store
+    ) { }
 
   ngOnInit(): void {
-    this.getElements();
+    this.getElements()
   }
 
+  onSelected(element: any): void {
+    this.store.dispatch(addSelectElement(element));
+  }
 }
