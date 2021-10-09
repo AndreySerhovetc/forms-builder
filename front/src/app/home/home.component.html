@@ -2,12 +2,14 @@
   <section class="info">
     <app-info-element></app-info-element>
   </section>
-  <section class="drop-field">
-  <app-drop-field></app-drop-field>
-  </section>
-  <section class="list-elements">
-    <app-list-of-element></app-list-of-element>
-  </section>
+  <div class="wrapper" cdkDropListGroup>
+    <section class="drop-field">
+      <app-drop-field></app-drop-field>
+    </section>
+    <section class="list-elements">
+      <app-list-of-element></app-list-of-element>
+    </section>
+  </div>
 </main>
 
 

@@ -10,7 +10,8 @@ export const Elements: Element[] = [
       border: '1px solid black',
       fontSize: '16px',
       fontWeight: 'normal',
-      color: '#000'
+      color: '#000',
+      backgroundColor: '#fff'
     }
   },
 
@@ -23,7 +24,9 @@ export const Elements: Element[] = [
       border: '1px solid black',
       fontSize: '16px',
       fontWeight: 'normal',
-      color: '#000'
+      color: '#000',
+      required: false,
+      placeholder: 'Enter your text'
     }
   },
 
@@ -36,7 +39,9 @@ export const Elements: Element[] = [
       border: '1px solid black',
       fontSize: '16px',
       fontWeight: 'normal',
-      color: '#000'
+      color: '#000',
+      required: false,
+      placeholder: 'Enter your text'
     }
   },
 
@@ -46,9 +51,6 @@ export const Elements: Element[] = [
     style: {
       width: '100px',
       height: '50px',
-      border: '1px solid black',
-      fontSize: '16px',
-      fontWeight: 'normal',
       color: '#000'
     }
   },

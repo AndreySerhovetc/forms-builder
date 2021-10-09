@@ -23,13 +23,38 @@
         [style.display]="accordionItem.expanded ? '' : 'none'"
         [attr.id]="'accordion-body-' + index"
         [attr.aria-labelledby]="'accordion-header-' + index">
-        <ul>
-          <li *ngFor="let prop of element | keyvalue">
-            <span *ngFor="let item of prop | keyvalue">
-              {{item.value}}
-            </span>
+        <ul
+          *ngIf="item === 'Info'"
+          class="details-list">
+          <li
+            class="details-list__item"
+            *ngFor="let el of element | keyvalue"
+          >
+            <div
+              class="details-list__style"
+              *ngFor="let item of el.value | keyvalue">
+                <strong>{{item.key}}</strong>: {{item.value}}
+            </div>
           </li>
         </ul>
+        <div
+          *ngIf="item === 'Change element'"
+          class="change-prop">
+          <ul class="details-list">
+            <li
+              *ngFor="let el of element | keyvalue"
+              class="deatils-list__item"
+            >
+            <div
+              *ngFor="let item of el.value | keyvalue"
+              class="details-prop"
+              >
+              <strong class="details-prop__value">{{item.key}}</strong>
+              <input type="text" placeholder="{{item.value}}">
+            </div>
+            </li>
+          </ul>
+        </div>
       </div>
     </cdk-accordion-item>
   </cdk-accordion>

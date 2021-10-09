@@ -6,10 +6,18 @@
 }
 
 .info {
-  flex-grow: 1;
+  flex-basis: 600px;
+  padding: 30px;
 }
 
 .drop-field {
-  flex-grow: 1;
-  border: 1px solid #fd974f;
+  width: 600px;
+  height: 100vh;
+  border: 1px dashed #fd974f;
+}
+
+.wrapper {
+  display: flex;
+  width: 100%;
+  height: 100vh;
 }

@@ -10,5 +10,6 @@ export interface Element {
     fontSize?: string,
     fontWeight?: string,
     color?: string
+    backgroundColor?: '#fff';
   }
 }

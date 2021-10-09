@@ -1,1 +1,28 @@
-
+<div class="field">
+  <ul
+    class="field-list"
+    cdkDropList
+    [cdkDropListData]="dropElements"
+    (cdkDropListDropped)="onDrop($event)"
+  >
+    <li
+      *ngFor="let item of dropElements"
+      class="field-list__item"
+      (click)="onSelected(item)"
+    >
+      <button *ngIf="item.name === 'button'" cdkDrag>Button</button>
+      <textarea *ngIf="item.name === 'textarea'" cols="30" rows="10" cdkDrag></textarea>
+      <input *ngIf="item.name === 'input'" type="text" cdkDrag>
+      <label *ngIf="item.name === 'checkbox'" for="checkBox" cdkDrag>
+        <input type="checkbox" id="checkBox" cdkDrag>
+      </label>
+      <select *ngIf="item.name === 'select'" cdkDrag>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select>
+    </li>
+  </ul>
+</div>

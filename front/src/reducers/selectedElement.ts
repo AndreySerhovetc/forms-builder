@@ -1,5 +1,4 @@
-import { elementEventFullName } from "@angular/compiler/src/view_compiler/view_compiler";
-import { createAction, createFeatureSelector, createReducer, createSelector, on, props } from "@ngrx/store";
+import { createAction, createFeatureSelector, createSelector, props } from "@ngrx/store";
 import { Element } from "src/app/Element";
 
 export const addSelectElement = createAction('[Element]', props<{element: Element}>());
@@ -18,7 +17,7 @@ export const selectedElementReducer = (state = initialState, action: any): State
   switch (action.type) {
     case "[Element]":
         return({...state,
-          selectedElement: action
+          selectedElement: action,
         })
     default:
       {
