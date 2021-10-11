@@ -33,30 +33,50 @@
             <div
               class="details-list__style"
               *ngFor="let item of el.value | keyvalue">
-                <strong>{{item.key}}</strong>: {{item.value}}
+                <strong>{{item.key}}</strong>:
+                <span>{{item.value}}</span>
             </div>
           </li>
         </ul>
         <div
-          *ngIf="item === 'Change element'"
-          class="change-prop">
-          <ul class="details-list">
-            <li
-              *ngFor="let el of element | keyvalue"
-              class="deatils-list__item"
-            >
-            <div
+        *ngIf="item === 'Change element'"
+        class="change-prop">
+        <form class="form">
+          <div class="wrap" *ngFor="let el of element | keyvalue">
+            <div class="form-control"
               *ngFor="let item of el.value | keyvalue"
-              class="details-prop"
-              >
-              <strong class="details-prop__value">{{item.key}}</strong>
-              <input type="text" placeholder="{{item.value}}">
-            </div>
-            </li>
-          </ul>
-        </div>
+            >
+            <strong class="details-prop__value">{{item.key}}</strong>
+            <input
+              type="text"
+              placeholder="{{item.value}}"
+              name="{{item.key}}"
+            >
+          </div>
+          </div>
+          <button class="btn btn--save" click="getStyle()">Save change</button>
+        </form>
+        <!-- <ul class="details-list">
+          <li
+            *ngFor="let el of element | keyvalue"
+            class="deatils-list__item"
+          >
+          <div
+            *ngFor="let item of el.value | keyvalue"
+            class="details-prop"
+            >
+            <strong class="details-prop__value">{{item.key}}</strong>
+            <input
+              type="text"
+              placeholder="{{item.value}}"
+              name="{{item.key}}"
+            >
+          </div>
+          </li>
+          <button class="btn">Save change</button>
+        </ul> -->
+      </div>
       </div>
     </cdk-accordion-item>
   </cdk-accordion>
 </div>
-

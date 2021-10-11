@@ -26,5 +26,9 @@ export const selectedElementReducer = (state = initialState, action: any): State
   }
 }
 
+// export const addElementSelector = (state = initialState, action: any): StateElements => {
+// }
+
 export const featureSelector = createFeatureSelector<StateElements> ('initialState');
 export const addSelectElementSelector = createSelector(featureSelector, state => state.selectedElement)
+export const addElementSelector = createSelector(featureSelector, state => state.listElements)

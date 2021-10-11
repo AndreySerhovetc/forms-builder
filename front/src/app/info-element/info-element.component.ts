@@ -1,8 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { addSelectElementSelector } from 'src/reducers/selectedElement';
-
 
 @Component({
   selector: 'app-info-element',
@@ -14,11 +13,12 @@ export class InfoElementComponent implements OnInit {
   getElement$!: Observable<any>;
   items = ['Info', 'Change element'];
   expandedIndex = 0;
-  
-  constructor(private store: Store) { }
+  currentElement?: Element
+
+  constructor(
+    private store: Store) { }
 
   ngOnInit(): void {
     this.getElement$ = this.store.select(addSelectElementSelector);
   }
-
 }

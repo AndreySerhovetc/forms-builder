@@ -56,21 +56,6 @@
   }
 }
 
-.btn {
-  width: 150px;
-  height: 40px;
-  font-size: 18px;
-  background-color: #fef2e4;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: background-color .3s ease;
-
-  &:hover {
-    background-color: darken(#fef2e4, 15%);
-  }
-}
-
 .form {
   display: flex;
   align-items: center;

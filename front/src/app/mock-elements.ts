@@ -6,11 +6,11 @@ export const Elements: Element[] = [
     name: 'button',
     style: {
       width: '100px',
-      height: '100px',
+      height: '30px',
       border: '1px solid black',
       fontSize: '16px',
       fontWeight: 'normal',
-      color: '#000',
+      color: '#0f0f0f',
       backgroundColor: '#fff'
     }
   },
@@ -20,7 +20,7 @@ export const Elements: Element[] = [
     name: 'textarea',
     style: {
       width: '100px',
-      height: '50px',
+      height: '30px',
       border: '1px solid black',
       fontSize: '16px',
       fontWeight: 'normal',
@@ -34,8 +34,8 @@ export const Elements: Element[] = [
     id: 3,
     name: 'input',
     style: {
-      width: '100px',
-      height: '50px',
+      width: '150px',
+      height: '30px',
       border: '1px solid black',
       fontSize: '16px',
       fontWeight: 'normal',
