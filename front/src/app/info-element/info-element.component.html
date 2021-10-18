@@ -1,6 +1,6 @@
-<div *ngIf="getElement$ | async as element">
+<div *ngIf="currentElement">
 
-  <h2>{{element.name | uppercase}} Details</h2>
+  <h2>{{currentElement.name }} {{currentElement.id }} Details</h2>
   <cdk-accordion class="example-accordion">
     <cdk-accordion-item
       *ngFor="let item of items; let index = index;"
@@ -28,7 +28,7 @@
           class="details-list">
           <li
             class="details-list__item"
-            *ngFor="let el of element | keyvalue"
+            *ngFor="let el of currentElement | keyvalue"
           >
             <div
               class="details-list__style"
@@ -42,41 +42,34 @@
         *ngIf="item === 'Change element'"
         class="change-prop">
         <form class="form">
-          <div class="wrap" *ngFor="let el of element | keyvalue">
-            <div class="form-control"
-              *ngFor="let item of el.value | keyvalue"
-            >
-            <strong class="details-prop__value">{{item.key}}</strong>
-            <input
-              type="text"
-              placeholder="{{item.value}}"
-              name="{{item.key}}"
-            >
-          </div>
-          </div>
-          <button class="btn btn--save" click="getStyle()">Save change</button>
-        </form>
-        <!-- <ul class="details-list">
-          <li
-            *ngFor="let el of element | keyvalue"
-            class="deatils-list__item"
+          <div class="wrap"
+            *ngFor="let el of currentElement | keyvalue"
           >
-          <div
-            *ngFor="let item of el.value | keyvalue"
-            class="details-prop"
+            <div
+              *ngFor="let prop of el.value | keyvalue"
+              class="details-prop"
             >
-            <strong class="details-prop__value">{{item.key}}</strong>
-            <input
-              type="text"
-              placeholder="{{item.value}}"
-              name="{{item.key}}"
-            >
+              <strong class="details-prop__value">{{prop.key}}</strong>
+              <input
+                type="text"
+                class="ddetails-prop__input"
+                name="{{prop.key}}"
+                [value]="prop.value"
+                (change)="onSelect(prop.key, $event)"
+              >
+            </div>
           </div>
-          </li>
-          <button class="btn">Save change</button>
-        </ul> -->
-      </div>
+          <button class="btn btn--save" click="getStyle()">Delete</button>
+        </form>
+        </div>
       </div>
     </cdk-accordion-item>
   </cdk-accordion>
+  <!-- <div *ngFor="let prop of arrayOfElement | keyvalue">
+    <div *ngFor="let item of prop.value | keyvalue">
+      <div *ngFor="let k of item.value | keyvalue">
+        <span>{{k.value}}</span>
+      </div>
+    </div>
+  </div> -->
 </div>
