@@ -1,6 +1,6 @@
-import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { Component, OnDestroy, OnInit} from '@angular/core';
-import { pipe, Subject } from 'rxjs';
+import { CdkDragDrop } from '@angular/cdk/drag-drop';
+import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Element } from '../Element';
 import { ShareServiceService } from '../share-service.service';
@@ -18,8 +18,6 @@ export class DropFieldComponent implements OnInit, OnDestroy {
   public objStyle?: any = {}
   private unsubscribeAll: Subject<any> = new Subject<any>();
 
-  // publuc selectedElement$ = this.transfer.selectedElement$;
-
   constructor(
     private share: ShareServiceService,
     private transfer: TransferService,
@@ -29,19 +27,12 @@ export class DropFieldComponent implements OnInit, OnDestroy {
     this.transfer.selectedElement$.pipe(takeUntil(this.unsubscribeAll))
     .subscribe(res => this.currentElement = res)
 
-    // this.transfer.deleteId$.subscribe(
-    //   res => {
-    //     this.deleteElement(res);
-    //   }
-    // )
-
     this.transfer.deleteId$.pipe(takeUntil(this.unsubscribeAll))
     .subscribe(res => this.deleteElement(res))
   }
 
   onSelected(element: any): void {
     this.transfer.changeSelectElement(element)
-    // this.store.dispatch(addSelectElement(element))
   }
 
   deleteElement(id: number) {

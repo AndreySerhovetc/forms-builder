@@ -13,7 +13,6 @@ import { TransferService } from '../transfer.service';
 })
 
 export class InfoElementComponent implements OnInit {
-  // getElement$!: Observable<any>;
   public currentElement: any;
   public deleteId?: any
   public objElement: any = {};
@@ -23,7 +22,6 @@ export class InfoElementComponent implements OnInit {
 
   constructor(
     private transfer: TransferService,
-    // private store: Store
   ) { }
 
   ngOnInit(): void {
@@ -38,7 +36,7 @@ export class InfoElementComponent implements OnInit {
 
   deleteElem(el: Element) {
     this.transfer.deleteElementId(el.id)
-    this.currentElement = {}
+    this.currentElement = null
   }
 
   ngOnDestroy(): void {
