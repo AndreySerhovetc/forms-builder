@@ -10,20 +10,51 @@
       class="field-list__item"
       (click)="onSelected(item)"
     >
-      <button *ngIf="item.name === 'button'" [ngStyle]="item.style" cdkDrag>Button</button>
-      <textarea *ngIf="item.name === 'textarea'" cols="30" rows="10" [ngStyle]="item.style" cdkDrag></textarea>
-      <input *ngIf="item.name === 'input'" type="text" [ngStyle]="item.style" cdkDrag>
-      <label *ngIf="item.name === 'checkbox'" for="checkBox" cdkDrag>
-        <input type="checkbox" id="checkBox" [ngStyle]="item.style" cdkDrag>
+      <button
+        *ngIf="item.name === 'button'"
+        [ngStyle]="item.style"
+        cdkDrag
+      >
+        Button
+      </button>
+      <textarea
+        *ngIf="item.name === 'textarea'"
+        cols="30"
+        rows="40"
+        [ngStyle]="item.style"
+        cdkDrag
+      ></textarea>
+      <input
+        *ngIf="item.name === 'input'"
+        type="text"
+        [ngStyle]="item.style"
+        [placeholder]="item.style.placeholder"
+        required={{item.style.required}}
+        cdkDrag
+      >
+      <label
+        *ngIf="item.name === 'checkbox'"
+        for="checkBox"
+        cdkDrag
+      >
+        <input
+          type="checkbox"
+          id="checkBox"
+          [ngStyle]="item.style"
+          cdkDrag
+        >
       </label>
-      <select *ngIf="item.name === 'select'" [ngStyle]="item.style" cdkDrag>
+      <select
+        *ngIf="item.name === 'select'"
+        [ngStyle]="item.style"
+        cdkDrag
+      >
         <option value="1">1</option>
         <option value="2">2</option>
         <option value="3">3</option>
         <option value="4">4</option>
         <option value="5">5</option>
       </select>
-     <!-- <button class="btn btn--del" (click)="deleteElement(item.id)">&#10006;</button> -->
     </li>
   </ul>
 </div>

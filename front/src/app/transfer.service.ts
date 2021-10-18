@@ -7,14 +7,14 @@ import { Subject } from 'rxjs';
 
 export class TransferService {
   public selectedElement$ = new Subject<Element>()
-  public listElements$: any[] = []
+  public deleteId$ = new Subject<number>()
 
-  public changeSelectElement(element: any) {
+  public changeSelectElement(element: Element) {
     this.selectedElement$.next(element)
   }
 
-  public addElementToList(element: any): void {
-    this.listElements$.push(element)
+  public deleteElementId(id: any): void {
+    this.deleteId$.next(id);
   }
 
   constructor() { }

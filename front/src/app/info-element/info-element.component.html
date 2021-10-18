@@ -41,35 +41,33 @@
         <div
         *ngIf="item === 'Change element'"
         class="change-prop">
-        <form class="form">
-          <div class="wrap"
-            *ngFor="let el of currentElement | keyvalue"
-          >
-            <div
-              *ngFor="let prop of el.value | keyvalue"
-              class="details-prop"
+          <form class="form">
+            <div class="wrap"
+              *ngFor="let el of currentElement | keyvalue"
             >
-              <strong class="details-prop__value">{{prop.key}}</strong>
-              <input
-                type="text"
-                class="ddetails-prop__input"
-                name="{{prop.key}}"
-                [value]="prop.value"
-                (change)="onSelect(prop.key, $event)"
+              <div
+                *ngFor="let prop of el.value | keyvalue"
+                class="details-prop"
               >
+                <strong class="details-prop__value">{{prop.key}}</strong>
+                <input
+                  type="text"
+                  class="details-prop__input"
+                  name="{{prop.key}}"
+                  [value]="prop.value"
+                  (change)="onSelect(prop.key, $event)"
+                >
+              </div>
             </div>
-          </div>
-          <button class="btn btn--save" click="getStyle()">Delete</button>
-        </form>
+            <button
+              class="btn btn--delete"
+              (click)="deleteElem(currentElement)"
+            >
+              Delete
+            </button>
+          </form>
         </div>
       </div>
     </cdk-accordion-item>
   </cdk-accordion>
-  <!-- <div *ngFor="let prop of arrayOfElement | keyvalue">
-    <div *ngFor="let item of prop.value | keyvalue">
-      <div *ngFor="let k of item.value | keyvalue">
-        <span>{{k.value}}</span>
-      </div>
-    </div>
-  </div> -->
 </div>

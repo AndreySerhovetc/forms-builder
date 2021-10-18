@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { addSelectElementSelector } from 'src/reducers/selectedElement';
 // import { addSelectElementSelector } from 'src/reducers/selectedElement';
 import { TransferService } from '../transfer.service';
@@ -12,14 +13,13 @@ import { TransferService } from '../transfer.service';
 })
 
 export class InfoElementComponent implements OnInit {
-  getElement$!: Observable<any>;
-  currentElement: any = {}
-  selectedId?: any
-  objElement: any = {};
-  arrayOfElement: any = this.transfer.listElements$
-  items = ['Info', 'Change element'];
-  expandedIndex = 0;
-
+  // getElement$!: Observable<any>;
+  public currentElement: any;
+  public deleteId?: any
+  public objElement: any = {};
+  public items = ['Info', 'Change element'];
+  public expandedIndex = 0;
+  private unsubscribeAll: Subject<any> = new Subject<any>();
 
   constructor(
     private transfer: TransferService,
@@ -27,26 +27,23 @@ export class InfoElementComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.transfer.selectedElement$.subscribe(
-      res => this.currentElement = res
-    )
-
-    // this.arrayOfElement = this.transfer.listElements$
-    // this.getElement$ = this.store.select(addSelectElementSelector);
-    // this.getElement$.pipe(
-    //   map((res: any) => console.log(res))
-    // )
-
+    this.transfer.selectedElement$.pipe(takeUntil(this.unsubscribeAll))
+    .subscribe(res => this.currentElement = res)
   };
-
 
   onSelect(key: any, event: Event): void {
     this.objElement = this.currentElement.style
     this.objElement[key] = (<HTMLInputElement>event.target).value;
   }
 
-  // getElementFromArray() {
-  //   this.transfer.loadElements = this.arrayOfElement
-  // }
+  deleteElem(el: Element) {
+    this.transfer.deleteElementId(el.id)
+    this.currentElement = {}
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscribeAll.next();
+    this.unsubscribeAll.complete();
+  }
 }
 
