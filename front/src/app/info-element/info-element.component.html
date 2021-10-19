@@ -50,21 +50,15 @@
                 class="details-prop"
               >
                 <strong class="details-prop__value">{{prop.key}}</strong>
-                <input
-                  type="text"
-                  class="details-prop__input"
-                  name="{{prop.key}}"
-                  [value]="prop.value"
-                  (change)="onSelect(prop.key, $event)"
-                >
+                  <input
+                    [type]="prop?.key==='backgroundColor' || prop?.key === 'color' ? 'color' : 'text'"
+                    class="details-prop__input"
+                    name="{{prop.key}}"
+                    [value]="prop.value"
+                    (change)="onSelect(prop.key, $event)"
+                  >
               </div>
             </div>
-            <button
-              class="btn btn--delete"
-              (click)="deleteElem(currentElement)"
-            >
-              Delete
-            </button>
           </form>
         </div>
       </div>

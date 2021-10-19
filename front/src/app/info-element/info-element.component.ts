@@ -1,9 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { addSelectElementSelector } from 'src/reducers/selectedElement';
-// import { addSelectElementSelector } from 'src/reducers/selectedElement';
 import { TransferService } from '../transfer.service';
 
 @Component({
@@ -12,10 +9,10 @@ import { TransferService } from '../transfer.service';
   styleUrls: ['./info-element.component.scss']
 })
 
-export class InfoElementComponent implements OnInit {
+export class InfoElementComponent implements OnInit, OnDestroy {
   public currentElement: any;
-  public deleteId?: any
-  public objElement: any = {};
+  public keys: any;
+  public objElement: any;
   public items = ['Info', 'Change element'];
   public expandedIndex = 0;
   private unsubscribeAll: Subject<any> = new Subject<any>();
@@ -27,6 +24,20 @@ export class InfoElementComponent implements OnInit {
   ngOnInit(): void {
     this.transfer.selectedElement$.pipe(takeUntil(this.unsubscribeAll))
     .subscribe(res => this.currentElement = res)
+
+    if (this.currentElement !== undefined) {
+      this.keys = Object.keys(this.currentElement)
+      console.log(this.keys)
+    }
+
+    this.transfer.deleteId$.pipe(takeUntil(this.unsubscribeAll))
+    .subscribe(id => {
+      this.hideInfo(id)
+    })
+
+    // this.transfer.deleteId$.subscribe(
+    //   id => this.deleteElem(id)
+    // )
   };
 
   onSelect(key: any, event: Event): void {
@@ -34,8 +45,7 @@ export class InfoElementComponent implements OnInit {
     this.objElement[key] = (<HTMLInputElement>event.target).value;
   }
 
-  deleteElem(el: Element) {
-    this.transfer.deleteElementId(el.id)
+  hideInfo(id: number) {
     this.currentElement = null
   }
 

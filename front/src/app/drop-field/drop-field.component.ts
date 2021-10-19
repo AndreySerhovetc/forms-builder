@@ -27,8 +27,6 @@ export class DropFieldComponent implements OnInit, OnDestroy {
     this.transfer.selectedElement$.pipe(takeUntil(this.unsubscribeAll))
     .subscribe(res => this.currentElement = res)
 
-    this.transfer.deleteId$.pipe(takeUntil(this.unsubscribeAll))
-    .subscribe(res => this.deleteElement(res))
   }
 
   onSelected(element: any): void {
@@ -37,6 +35,7 @@ export class DropFieldComponent implements OnInit, OnDestroy {
 
   deleteElement(id: number) {
     this.dropElements = this.dropElements.filter((item: Element) => item.id !== id)
+    this.transfer.deleteElementId(id)
    }
 
   onDrop(event: CdkDragDrop<Element[]>) {

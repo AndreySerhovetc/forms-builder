@@ -8,12 +8,24 @@
     <li
       *ngFor="let item of dropElements"
       class="field-list__item"
+      [class.active]="item === currentElement"
       (click)="onSelected(item)"
+      cdkDrag
     >
+    <div class="control-btn">
+      <button class="control-btn__update">
+        <i class="fas fa-edit"></i>
+      </button>
+      <button
+        class="control-btn__delete"
+        (click)="deleteElement(item.id)"
+      >
+        <i class="fas fa-trash-alt"></i>
+      </button>
+    </div>
       <button
         *ngIf="item.name === 'button'"
         [ngStyle]="item.style"
-        cdkDrag
       >
         Button
       </button>
@@ -23,32 +35,30 @@
         rows="40"
         [ngStyle]="item.style"
         [placeholder]="item.style.placeholder"
-        cdkDrag
       ></textarea>
-      <input
-        *ngIf="item.name === 'input'"
-        type="text"
-        [ngStyle]="item.style"
-        [placeholder]="item.style.placeholder"
-        required={{item.style.required}}
-        cdkDrag
-      >
+      <label *ngIf="item.name === 'input'">
+        {{item.style.label}}
+         <input
+            type="text"
+            [ngStyle]="item.style"
+            [placeholder]="item.style.placeholder"
+            required={{item.style.required}}
+          >
+      </label>
+
       <label
         *ngIf="item.name === 'checkbox'"
         for="checkBox"
-        cdkDrag
       >
         <input
           type="checkbox"
           id="checkBox"
           [ngStyle]="item.style"
-          cdkDrag
         >
       </label>
       <select
         *ngIf="item.name === 'select'"
         [ngStyle]="item.style"
-        cdkDrag
       >
         <option value="1">1</option>
         <option value="2">2</option>

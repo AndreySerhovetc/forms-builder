@@ -11,5 +11,6 @@ export interface Element {
     fontWeight?: string,
     color?: string
     backgroundColor?: '#fff';
+    label?: string;
   }
 }

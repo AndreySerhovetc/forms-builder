@@ -1,13 +1,59 @@
 .field {
   width: 100%;
   height: 100vh;
+  padding: 15px;
 
   &-list {
     height: 100vh;
     list-style: none;
 
     &__item {
-      margin-bottom: 20px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      padding: 20px 10px;
+      transition: box-shadow .3s ease-in, border .3s;
+
+      &:hover {
+        box-shadow: 0px 6px 8px 0px rgba(34, 60, 80, 0.2);
+        cursor: pointer;
+      }
+      &:hover .control-btn {
+        visibility: visible;
+      }
     }
+
+    &__item.active {
+      border: 2px dotted green;
+    }
+  }
+}
+
+.control-btn {
+  visibility: hidden;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 70px;
+  transition: visibility 0.3s ease-in-out;
+
+  &__update,
+  &__delete {
+    background-color: transparent;
+    margin-right: 5px;
+    width: 30px;
+    height: 30px;
+    border: none;
+    border-radius: 10px;
+    transition: background-color .2s ease-in;
+    cursor:pointer;
+
+    &:hover {
+      background-color: darken(#fef2e4, 15%);
+    }
+  }
+
+  &__delete:hover {
+    background-color: darken(#fc573a, 5%);
   }
 }
