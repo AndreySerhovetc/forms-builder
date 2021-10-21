@@ -34,13 +34,13 @@
   position: absolute;
   right: 0;
   top: 0;
-  width: 70px;
+  width: 90px;
   transition: visibility 0.3s ease-in-out;
 
   &__update,
-  &__delete {
+  &__delete,
+  &__add {
     background-color: transparent;
-    margin-right: 5px;
     width: 30px;
     height: 30px;
     border: none;
@@ -54,6 +54,10 @@
   }
 
   &__delete:hover {
-    background-color: darken(#fc573a, 5%);
+    background-color: lighten(#fc573a, 5%);
+  }
+
+  &__add:hover {
+    background-color: lighten(#2ab318, 10%);
   }
 }

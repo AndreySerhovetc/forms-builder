@@ -51,10 +51,10 @@
               >
                 <strong class="details-prop__value">{{prop.key}}</strong>
                   <input
-                    [type]="prop?.key==='backgroundColor' || prop?.key === 'color' ? 'color' : 'text'"
+                    [type]="changeInputType(prop.key)"
                     class="details-prop__input"
                     name="{{prop.key}}"
-                    [value]="prop.value"
+                    value="{{prop.value}}"
                     (change)="onSelect(prop.key, $event)"
                   >
               </div>
@@ -65,3 +65,5 @@
     </cdk-accordion-item>
   </cdk-accordion>
 </div>
+
+

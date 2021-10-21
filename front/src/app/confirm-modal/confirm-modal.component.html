@@ -1,0 +1,11 @@
+<h1 mat-dialog-title>Warning</h1>
+<div mat-dialog-content>Are you sure you want to remove this field?</div>
+<div mat-dialog-actions>
+  <button class="btn mr-15" (click)="dialogRef.close(true)" color="primary">
+    Confirm
+  </button>
+  <button class="btn" (click)="dialogRef.close(false)">
+    Cancel
+  </button>
+</div>
+

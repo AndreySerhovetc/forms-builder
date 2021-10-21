@@ -17,37 +17,47 @@
         <i class="fas fa-edit"></i>
       </button>
       <button
+        *ngIf="item.name === 'Select'"
+        class="control-btn__add"
+      >
+        <i class="fas fa-plus"></i>
+      </button>
+      <button
         class="control-btn__delete"
-        (click)="deleteElement(item.id)"
+        (click)="openDialog()"
       >
         <i class="fas fa-trash-alt"></i>
       </button>
     </div>
       <button
-        *ngIf="item.name === 'button'"
+        *ngIf="item.name === 'Button'"
         [ngStyle]="item.style"
       >
         Button
       </button>
-      <textarea
-        *ngIf="item.name === 'textarea'"
-        cols="30"
-        rows="40"
-        [ngStyle]="item.style"
-        [placeholder]="item.style.placeholder"
+
+      <label *ngIf="item.name === 'Textarea'">
+        {{item.style.label}}
+         <textarea
+          cols="30"
+          rows="40"
+          [ngStyle]="item.style"
+          [placeholder]="item.style.placeholder"
       ></textarea>
-      <label *ngIf="item.name === 'input'">
+      </label>
+     
+      <label *ngIf="item.name === 'Input'">
         {{item.style.label}}
          <input
             type="text"
             [ngStyle]="item.style"
             [placeholder]="item.style.placeholder"
-            required={{item.style.required}}
+            [required]="item.style.required"
           >
       </label>
 
       <label
-        *ngIf="item.name === 'checkbox'"
+        *ngIf="item.name === 'Checkbox'"
         for="checkBox"
       >
         <input
@@ -56,15 +66,12 @@
           [ngStyle]="item.style"
         >
       </label>
+
       <select
-        *ngIf="item.name === 'select'"
+        *ngIf="item.name === 'Select'"
         [ngStyle]="item.style"
       >
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
+        <option value="1">Option 1</option>
       </select>
     </li>
   </ul>

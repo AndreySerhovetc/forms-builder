@@ -10,7 +10,22 @@
       cdkDrag
       *ngFor="let el of elements"
     >
-      {{el.name}}
+      <span class="icon" *ngIf="el.name === 'Button'">
+        <img src="../../assets/icon/button.svg" alt="Button">
+      </span>
+      <span class="icon" *ngIf="el.name === 'Input'">
+        <img src="../../assets/icon/text-field.svg" alt="Text field">
+      </span>
+      <span class="icon" *ngIf="el.name === 'Textarea'">
+        <img src="../../assets/icon/text-area.svg" alt="Textarea">
+      </span>
+      <span class="icon" *ngIf="el.name === 'Checkbox'">
+        <img src="../../assets/icon/checkbox.svg" alt="Checkbox">
+      </span>
+      <span class="icon" *ngIf="el.name === 'Select'">
+        <img src="../../assets/icon/select.svg" alt="Select">
+      </span>
+      <strong>{{el.name}}</strong>
     </div>
   </div>
 </div>
