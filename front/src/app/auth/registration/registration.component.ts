@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../../shared/services/auth-service/auth.service';
 
 @Component({
   selector: 'app-registration',
@@ -10,7 +10,9 @@ import { AuthService } from '../auth.service';
 })
 export class RegistrationComponent implements OnInit {
   registForm!: FormGroup;
+
   successMsg: string = '';
+
   errorMsg: string = '';
 
   registerUserData = {
@@ -29,12 +31,12 @@ export class RegistrationComponent implements OnInit {
       ]),
     });
 
-    this.registForm.valueChanges.subscribe((res) => {
+    this.registForm.valueChanges.subscribe(() => {
       if (this.errorMsg.length) this.errorMsg = '';
     });
   }
 
-  onSubmit() {
+  onSubmit(): void {
     if (this.registForm.valid) {
       const formData = { ...this.registForm.value };
 
@@ -45,7 +47,7 @@ export class RegistrationComponent implements OnInit {
     }
   }
 
-  registerUser() {
+  registerUser(): void {
     this.auth.registerUser(this.registerUserData).subscribe(
       (res) => {
         localStorage.setItem('token', res.token);
@@ -53,7 +55,7 @@ export class RegistrationComponent implements OnInit {
         this.registForm.reset();
         this.route.navigate(['']);
       },
-      (error) => (this.errorMsg = error.error)
+      (error) => (this.errorMsg = error.error),
     );
   }
 }

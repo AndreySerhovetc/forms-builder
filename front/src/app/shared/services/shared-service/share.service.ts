@@ -1,21 +1,14 @@
-import {
-  CdkDragDrop,
-  copyArrayItem,
-  moveItemInArray,
-} from '@angular/cdk/drag-drop';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root',
 })
-export class ShareServiceService {
-  public counter = 0;
-
-  constructor() {}
+export class ShareService {
 
   public drop(event: CdkDragDrop<any>) {
     if (event.previousContainer !== event.container) {
       const clone = JSON.parse(
-        JSON.stringify(event.previousContainer.data[event.previousIndex])
+        JSON.stringify(event.previousContainer.data[event.previousIndex]),
       );
       clone.id = new Date().getTime();
       event.container.data.splice(event.currentIndex, 0, clone);
@@ -23,7 +16,7 @@ export class ShareServiceService {
       moveItemInArray(
         event.container.data,
         event.previousIndex,
-        event.currentIndex
+        event.currentIndex,
       );
     }
   }

@@ -48,11 +48,11 @@
      
       <label *ngIf="item.name === 'Input'">
         {{item.style.label}}
+        <span *ngIf="item.style.required" class="input-required">*</span>
          <input
             type="text"
             [ngStyle]="item.style"
             [placeholder]="item.style.placeholder"
-            [required]="item.style.required"
           >
       </label>
 

@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { TransferService } from '../transfer.service';
+import { TransferService } from '../shared/services/transfer-sevice/transfer.service';
 
 @Component({
   selector: 'app-info-element',
@@ -10,10 +10,15 @@ import { TransferService } from '../transfer.service';
 })
 export class InfoElementComponent implements OnInit, OnDestroy {
   public currentElement: any;
-  public typeInput: string = '';
+
   public objElement: any;
+
+  public typeInput: string = '';
+
   public items = ['Info', 'Change element'];
+
   public expandedIndex = 0;
+  
   private unsubscribeAll: Subject<any> = new Subject<any>();
 
   constructor(private transfer: TransferService) {}
@@ -32,22 +37,13 @@ export class InfoElementComponent implements OnInit, OnDestroy {
       });
   }
 
-  onSelect(key: any, event: Event): void {
+  onSelect(obj: { key: string, value: string }): void {
+    let { key, value } = obj;
     this.objElement = this.currentElement.style;
-    this.objElement[key] = (<HTMLInputElement>event.target).value;
+    this.objElement[key] = value;
   }
 
-  changeInputType(key: any) {
-    if (key === 'backgroundColor' || key === 'color') {
-      return 'color';
-    } else if (key === 'required') {
-      return 'checkbox';
-    } else {
-      return 'text';
-    }
-  }
-
-  hideInfo(id: number) {
+  hideInfo(id: number): void {
     if (this.currentElement.id === id) {
       this.currentElement = null;
     }

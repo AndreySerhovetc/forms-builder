@@ -28,36 +28,32 @@
           class="details-list">
           <li
             class="details-list__item"
-            *ngFor="let el of currentElement | keyvalue"
+            *ngFor="let prop of currentElement.style | keyvalue"
           >
-            <div
-              class="details-list__style"
-              *ngFor="let item of el.value | keyvalue">
-                <strong>{{item.key}}</strong>:
-                <span>{{item.value}}</span>
-            </div>
+            <strong>{{prop.key}}</strong>:
+            <span>{{prop.value}}</span>
           </li>
         </ul>
-        <div
-        *ngIf="item === 'Change element'"
-        class="change-prop">
+        <div *ngIf="item === 'Change element'" class="change-prop">
           <form class="form">
-            <div class="wrap"
-              *ngFor="let el of currentElement | keyvalue"
+            <div
+              class="wrap"
+              *ngFor="let prop of currentElement.style | keyvalue"
             >
-              <div
-                *ngFor="let prop of el.value | keyvalue"
-                class="details-prop"
+              <strong class="details-prop__value">{{prop.key}}</strong>
+              <app-custom-input
+                [key]="prop.key"
+                [value]="prop.value"
+                (valueChange) = "onSelect($event)"
               >
-                <strong class="details-prop__value">{{prop.key}}</strong>
-                  <input
+              </app-custom-input>
+                  <!-- <input
                     [type]="changeInputType(prop.key)"
                     class="details-prop__input"
                     name="{{prop.key}}"
                     value="{{prop.value}}"
                     (change)="onSelect(prop.key, $event)"
-                  >
-              </div>
+                  > -->
             </div>
           </form>
         </div>

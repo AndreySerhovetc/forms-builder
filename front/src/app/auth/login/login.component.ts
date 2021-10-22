@@ -1,16 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../../shared/services/auth-service/auth.service';
 @Component({
-  selector: 'app-sing-in',
-  templateUrl: './sing-in.component.html',
-  styleUrls: ['./sing-in.component.scss'],
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss'],
 })
-export class SingInComponent implements OnInit {
-  loginForm!: FormGroup;
-  currentErr: string = '';
-  successMsg: string = '';
+export class LoginComponent implements OnInit {
+  public loginForm!: FormGroup;
+
+  public currentErr: string = '';
+
+  public successMsg: string = '';
 
   loginUserData = {
     email: '',
@@ -28,13 +30,13 @@ export class SingInComponent implements OnInit {
       ]),
     });
 
-    this.loginForm.valueChanges.subscribe((res) => {
+    this.loginForm.valueChanges.subscribe(() => {
       if (this.currentErr.length) this.currentErr = '';
       if (this.successMsg.length) this.successMsg = '';
     });
   }
 
-  onSubmit() {
+  onSubmit(): void {
     if (this.loginForm.valid) {
       const formData = { ...this.loginForm.value };
 
@@ -45,7 +47,7 @@ export class SingInComponent implements OnInit {
     }
   }
 
-  loginUser() {
+  loginUser(): void {
     this.auth.loginUser(this.loginUserData).subscribe(
       (res) => {
         localStorage.setItem('token', res.token);
@@ -55,7 +57,7 @@ export class SingInComponent implements OnInit {
       (err) => {
         this.loginForm.get('password')?.setValue('');
         this.currentErr = err.error;
-      }
+      },
     );
   }
 }

@@ -1,4 +1,4 @@
-import { Element } from './Element';
+import { Element } from './interfaces/element';
 
 export const Elements: Element[] = [
   {

@@ -1,0 +1,35 @@
+<input
+  class="custom-input__text"
+  type="text"
+  *ngIf="key === 'width' || key === 'height' || key === 'fontSize' || key === 'placeholder' || key === 'label' || key === 'border'"
+  value="{{value}}"
+  (change)="onChange($event)"
+>
+<input
+  class="custom-input__color"
+  type="color"
+  *ngIf="key === 'color' || key === 'backgroundColor'"
+  value="{{value}}"
+  (change)="onChange($event)"
+>
+
+<label class="switch" *ngIf="key === 'required'">
+  <input
+    class="switch__input"
+    type="checkbox"
+    value="{{value}}"
+    (change)="onChange($event)"
+  >
+  <span class="slider round"></span>
+</label>
+
+<select
+  class="custom-input__select"
+  name="fortWeight"
+  *ngIf="key === 'fontWeight'"
+  value="{{value}}"
+  (change)="onChange($event)"
+>
+  <option class="custom-input__select-option" value="normal">Normal</option>
+  <option class="custom-input__select-option" value="bold">Bold</option>
+</select>

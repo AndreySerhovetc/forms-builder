@@ -1,23 +1,24 @@
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
-import { Component, OnInit } from '@angular/core';
-import { ShareServiceService } from '../share-service.service';
-import { Element } from '../Element';
-import { ElementService } from '../element.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ShareService } from '../shared/services/shared-service/share.service';
+import { Element } from '../shared/interfaces/element';
+import { ElementService } from '../shared/services/element-service/element.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-list-of-element',
-  templateUrl: './list-of-element.component.html',
-  styleUrls: ['./list-of-element.component.scss'],
+  selector: 'app-elements-list',
+  templateUrl: './elements-list.component.html',
+  styleUrls: ['./elements-list.component.scss'],
 })
-export class ListOfElementComponent implements OnInit {
+export class ElementsListComponent implements OnInit, OnDestroy {
   public elements: Element[] = [];
+
   private unsubscribeAll: Subject<any> = new Subject<any>();
 
   constructor(
     private elementService: ElementService,
-    private share: ShareServiceService
+    private share: ShareService,
   ) {}
 
   ngOnInit(): void {
@@ -27,7 +28,7 @@ export class ListOfElementComponent implements OnInit {
       .subscribe((res) => (this.elements = res));
   }
 
-  onDrop(event: CdkDragDrop<Element[]>) {
+  onDrop(event: CdkDragDrop<Element[]>): void {
     this.share.drop(event);
   }
 

@@ -1,20 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ErrorPageComponent } from './error-page/error-page.component';
-import { HomeComponent } from './home/home.component';
-import { RegistrationComponent } from './registration/registration.component';
-import { SingInComponent } from './sing-in/sing-in.component';
+
 
 const routes: Routes = [
-  {path: '', component: HomeComponent},
-  {path: 'registration', component: RegistrationComponent},
-  {path: 'singin', component: SingInComponent},
-  {path: 'error', component: ErrorPageComponent},
-  {path: '**', redirectTo: '/error'}
+  { path: '', loadChildren: () => import('./home/home.module').then(m => m.HomeModule) },
+  { path: 'registration', loadChildren: () => import('./auth/registration/registration.module').then(m => m.RegistrationModule) },
+  { path: 'login', loadChildren: () => import('./auth/login/login.module').then(m => m.LoginModule) },
+  { path: 'error', loadChildren: () => import('./error-page/error.module').then(m => m.ErrorModule) },
+  { path: '**', redirectTo: '/error' },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class AppRoutingModule { }
