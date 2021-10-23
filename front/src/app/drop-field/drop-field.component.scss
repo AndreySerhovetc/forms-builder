@@ -62,6 +62,8 @@
   }
 }
 
-.input-required {
-  color: red;
+.required::after {
+  display: inline-block;
+  content: "*";
+  color:red;
 }

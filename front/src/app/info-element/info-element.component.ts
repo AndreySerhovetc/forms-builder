@@ -1,7 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { TransferService } from '../shared/services/transfer-sevice/transfer.service';
+import { TransferService } from '../shared/services/transfer-service/transfer.service';
+// import { Element } from '../shared/interfaces/element';
 
 @Component({
   selector: 'app-info-element',
@@ -9,16 +10,14 @@ import { TransferService } from '../shared/services/transfer-sevice/transfer.ser
   styleUrls: ['./info-element.component.scss'],
 })
 export class InfoElementComponent implements OnInit, OnDestroy {
-  public currentElement: any;
+  public currentElement?: any;
 
-  public objElement: any;
-
-  public typeInput: string = '';
+  public styleObject: any;
 
   public items = ['Info', 'Change element'];
 
   public expandedIndex = 0;
-  
+
   private unsubscribeAll: Subject<any> = new Subject<any>();
 
   constructor(private transfer: TransferService) {}
@@ -37,15 +36,17 @@ export class InfoElementComponent implements OnInit, OnDestroy {
       });
   }
 
-  onSelect(obj: { key: string, value: string }): void {
+  onSelect(obj: { key: string; value: string }): void {
     let { key, value } = obj;
-    this.objElement = this.currentElement.style;
-    this.objElement[key] = value;
+    this.styleObject = this.currentElement.style;
+    this.styleObject[key] = value;
   }
 
   hideInfo(id: number): void {
-    if (this.currentElement.id === id) {
-      this.currentElement = null;
+    if (this.currentElement) {
+      if (this.currentElement.id === id) {
+        this.currentElement = {};
+      }
     }
   }
 

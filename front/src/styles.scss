@@ -79,31 +79,10 @@ body {
     justify-content: center;
     color: black;
   }
-}
-
-.btn {
-  width: 150px;
-  height: 40px;
-  font-size: 18px;
-  background-color: #fef2e4;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: background-color .3s ease;
 
   &--delete {
     width: 100%;
     height: 30px;
-  }
-
-  &--del {
-    width: 40px;
-    height: 30px;
-    margin-left: 20px;
-  }
-  
-  &:hover {
-    background-color: darken(#fef2e4, 15%);
   }
 }
 

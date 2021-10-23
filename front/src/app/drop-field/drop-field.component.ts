@@ -5,7 +5,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Element } from '../shared/interfaces/element';
 import { ShareService } from '../shared/services/shared-service/share.service';
-import { TransferService } from '../shared/services/transfer-sevice/transfer.service';
+import { TransferService } from '../shared/services/transfer-service/transfer.service';
 import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
 
 @Component({
@@ -16,15 +16,14 @@ import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
 export class DropFieldComponent implements OnInit, OnDestroy {
   public dropElements: Element[] = [];
 
-  public currentElement?: any = {};
-
-  public objStyle?: any = {};
-
-  private unsubscribeAll: Subject<any> = new Subject<any>();
+  public currentElement?: Element;
 
   public deleteId?: number;
 
   public dialogRef?: MatDialogRef<ConfirmModalComponent>;
+
+  private unsubscribeAll: Subject<any> = new Subject<any>();
+
 
   constructor(
     private share: ShareService,
@@ -35,10 +34,10 @@ export class DropFieldComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.transfer.selectedElement$
       .pipe(takeUntil(this.unsubscribeAll))
-      .subscribe((res) => (this.currentElement = res));
+      .subscribe(res => this.currentElement = res);
   }
 
-  onSelected(element: any): void {
+  onSelected(element: Element): void {
     this.transfer.changeSelectElement(element);
     this.deleteId = element.id;
   }

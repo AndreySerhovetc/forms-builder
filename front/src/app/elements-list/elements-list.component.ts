@@ -1,10 +1,10 @@
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { ShareService } from '../shared/services/shared-service/share.service';
 import { Element } from '../shared/interfaces/element';
 import { ElementService } from '../shared/services/element-service/element.service';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-elements-list',

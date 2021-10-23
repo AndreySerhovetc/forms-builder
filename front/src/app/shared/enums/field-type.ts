@@ -1,8 +1,8 @@
 export enum FieldTypes {
-  width,
-  height,
-  fontSize,
-  border,
-  placeholder,
-  label,
+  width = 'width',
+  height = 'height',
+  fontSize = 'fontSize',
+  border = 'border',
+  placeholder = 'placeholder',
+  label = 'label',
 }

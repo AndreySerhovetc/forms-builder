@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { AuthService } from '../../shared/services/auth-service/auth.service';
 
 @Component({
@@ -8,17 +10,19 @@ import { AuthService } from '../../shared/services/auth-service/auth.service';
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.scss'],
 })
-export class RegistrationComponent implements OnInit {
-  registForm!: FormGroup;
+export class RegistrationComponent implements OnInit, OnDestroy {
+  public registForm!: FormGroup;
 
-  successMsg: string = '';
+  public successMsg = '';
 
-  errorMsg: string = '';
+  public errorMsg = '';
 
-  registerUserData = {
+  public registerUserData = {
     email: '',
     password: '',
   };
+
+  private unsubscribeAll: Subject<any> = new Subject<any>();
 
   constructor(private auth: AuthService, private route: Router) {}
 
@@ -31,9 +35,11 @@ export class RegistrationComponent implements OnInit {
       ]),
     });
 
-    this.registForm.valueChanges.subscribe(() => {
-      if (this.errorMsg.length) this.errorMsg = '';
-    });
+    this.registForm.valueChanges
+      .pipe(takeUntil(this.unsubscribeAll))
+      .subscribe(() => {
+        if (this.errorMsg.length) this.errorMsg = '';
+      });
   }
 
   onSubmit(): void {
@@ -57,5 +63,10 @@ export class RegistrationComponent implements OnInit {
       },
       (error) => (this.errorMsg = error.error),
     );
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscribeAll.next();
+    this.unsubscribeAll.complete();
   }
 }

@@ -1,10 +1,13 @@
-<input
-  class="custom-input__text"
-  type="text"
-  *ngIf="key === 'width' || key === 'height' || key === 'fontSize' || key === 'placeholder' || key === 'label' || key === 'border'"
-  value="{{value}}"
-  (change)="onChange($event)"
->
+<div *ngFor="let type of keys() | keyvalue">
+  <input
+    *ngIf="key === type.value"
+    class="custom-input__text"
+    type="text"
+    value="{{value}}"
+    (change)="onChange($event)"
+  >
+</div>
+
 <input
   class="custom-input__color"
   type="color"
@@ -17,8 +20,8 @@
   <input
     class="switch__input"
     type="checkbox"
-    value="{{value}}"
-    (change)="onChange($event)"
+    (click)="onChange($event)"
+    checked
   >
   <span class="slider round"></span>
 </label>

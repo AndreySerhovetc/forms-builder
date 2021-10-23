@@ -1,23 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { AuthService } from '../../shared/services/auth-service/auth.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
   public loginForm!: FormGroup;
 
-  public currentErr: string = '';
+  public currentErr = '';
 
-  public successMsg: string = '';
+  public successMsg = '';
 
-  loginUserData = {
+  public loginUserData = {
     email: '',
     password: '',
   };
+
+  private unsubscribeAll: Subject<any> = new Subject<any>();
 
   constructor(private auth: AuthService, private route: Router) {}
 
@@ -30,10 +34,12 @@ export class LoginComponent implements OnInit {
       ]),
     });
 
-    this.loginForm.valueChanges.subscribe(() => {
-      if (this.currentErr.length) this.currentErr = '';
-      if (this.successMsg.length) this.successMsg = '';
-    });
+    this.loginForm.valueChanges
+      .pipe(takeUntil(this.unsubscribeAll))
+      .subscribe(() => {
+        if (this.currentErr.length) this.currentErr = '';
+        if (this.successMsg.length) this.successMsg = '';
+      });
   }
 
   onSubmit(): void {
@@ -48,16 +54,24 @@ export class LoginComponent implements OnInit {
   }
 
   loginUser(): void {
-    this.auth.loginUser(this.loginUserData).subscribe(
-      (res) => {
-        localStorage.setItem('token', res.token);
-        this.successMsg = 'You successful logged in';
-        this.route.navigate(['']);
-      },
-      (err) => {
-        this.loginForm.get('password')?.setValue('');
-        this.currentErr = err.error;
-      },
-    );
+    this.auth
+      .loginUser(this.loginUserData)
+      .pipe(takeUntil(this.unsubscribeAll))
+      .subscribe(
+        (res) => {
+          localStorage.setItem('token', res.token);
+          this.successMsg = 'You successful logged in';
+          this.route.navigate(['']);
+        },
+        (err) => {
+          this.loginForm.get('password')?.setValue('');
+          this.currentErr = err.error;
+        },
+      );
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscribeAll.next();
+    this.unsubscribeAll.complete();
   }
 }

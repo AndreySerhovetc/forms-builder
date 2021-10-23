@@ -1,4 +1,9 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
 import { FieldTypes } from '../../shared/enums/field-type';
 
 @Component({
@@ -13,28 +18,29 @@ export class CustomInputComponent {
 
   @Output() valueChange = new EventEmitter<any>();
 
-  public fileTypes = Object.keys(FieldTypes);
-
-  public type: string = '';
-
-
   onChange(event: Event) {
+    const key = this.key;
+    let newValue: string | boolean;
+
+    if ((<HTMLInputElement>event.target).checked) {
+      newValue = true;
+    } else {
+      newValue = false;
+    }
+
+    if (key !== 'required') {
+      newValue = (<HTMLInputElement>event.target).value;
+    }
+
     const currentKeyValue = {
-      key: this.key,
-      value: (<HTMLInputElement>event.target).value,
+      key,
+      value: newValue,
     };
 
-    // if ((<HTMLInputElement>event.target).checked) {
-    //   currentKeyValue.value = 'true';
-    // } else {
-    //   currentKeyValue.value = 'false';
-    // }
     this.valueChange.emit(currentKeyValue);
   }
 
-  // changeInputType() {
-  //   for (let type of this.fileTypes) {
-
-  //   }
-  // }
+  keys(): string[] {
+    return Object.keys(FieldTypes);
+  }
 }

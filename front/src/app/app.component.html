@@ -1,20 +1,26 @@
 <header class="header">
   <a [routerLink]="['/']" class="header__link">Builder</a>
-  <div class="nav-link">
-    <a
-      [routerLink]="['/registration']"
-      class="nav-link__btn"
-      routerLinkActive="active"
-    >
-      Registration
-    </a>
-    <a
-      [routerLink]="['/login']"
-      class="nav-link__btn"
-      routerLinkActive="active"
-    >
-      Sing-in
-    </a>
-  </div>
+  <nav>
+    <ul class="nav-link">
+      <li class="nav-link__item">
+        <a
+          [routerLink]="['/registration']"
+          class="nav-link__btn"
+          routerLinkActive="active"
+        >
+          Registration
+        </a>
+      </li>
+      <li class="nav-link__item">
+        <a
+          [routerLink]="['/login']"
+          class="nav-link__btn"
+          routerLinkActive="active"
+        >
+          Sing-in
+        </a>
+      </li>
+    </ul>
+  </nav>
 </header>
 <router-outlet></router-outlet>

@@ -13,7 +13,15 @@
 }
 
 .nav-link {
-  width: 250px;
+  display: flex;
+  list-style: none;
+
+  &__item {
+    margin-right: 30px;
+    &:last-child {
+      margin-right: 0;
+    }
+  }
 
   &__btn {
     margin-right: 30px;

@@ -48,7 +48,7 @@
      
       <label *ngIf="item.name === 'Input'">
         {{item.style.label}}
-        <span *ngIf="item.style.required" class="input-required">*</span>
+        <span [ngClass]="item.style.required === true ? 'required' : ''"></span>
          <input
             type="text"
             [ngStyle]="item.style"
