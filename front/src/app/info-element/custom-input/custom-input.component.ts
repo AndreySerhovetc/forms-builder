@@ -12,9 +12,9 @@ import { FieldTypes } from '../../shared/enums/field-type';
   styleUrls: ['./custom-input.component.scss'],
 })
 export class CustomInputComponent {
-  @Input() key: any = '';
+  @Input() key = '';
 
-  @Input() value: any = '';
+  @Input() value: string | boolean = '';
 
   @Output() valueChange = new EventEmitter<any>();
 

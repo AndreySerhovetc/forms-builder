@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { TransferService } from '../shared/services/transfer-service/transfer.service';
-// import { Element } from '../shared/interfaces/element';
+import { Element, Style } from '../shared/interfaces/element';
 
 @Component({
   selector: 'app-info-element',
@@ -10,9 +10,9 @@ import { TransferService } from '../shared/services/transfer-service/transfer.se
   styleUrls: ['./info-element.component.scss'],
 })
 export class InfoElementComponent implements OnInit, OnDestroy {
-  public currentElement?: any;
+  public currentElement?: Element;
 
-  public styleObject: any;
+  public styleObject?: Style;
 
   public items = ['Info', 'Change element'];
 
@@ -38,14 +38,17 @@ export class InfoElementComponent implements OnInit, OnDestroy {
 
   onSelect(obj: { key: string; value: string }): void {
     let { key, value } = obj;
-    this.styleObject = this.currentElement.style;
-    this.styleObject[key] = value;
+
+    if (this.currentElement?.style) {
+      this.styleObject = this.currentElement.style;
+      this.styleObject[key] = value;
+    }
   }
 
   hideInfo(id: number): void {
     if (this.currentElement) {
       if (this.currentElement.id === id) {
-        this.currentElement = {};
+        this.currentElement = undefined;
       }
     }
   }

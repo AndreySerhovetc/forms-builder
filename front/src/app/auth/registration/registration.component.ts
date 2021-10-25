@@ -54,15 +54,18 @@ export class RegistrationComponent implements OnInit, OnDestroy {
   }
 
   registerUser(): void {
-    this.auth.registerUser(this.registerUserData).subscribe(
-      (res) => {
-        localStorage.setItem('token', res.token);
-        this.successMsg = 'Registration successful';
-        this.registForm.reset();
-        this.route.navigate(['']);
-      },
-      (error) => (this.errorMsg = error.error),
-    );
+    this.auth
+      .registerUser(this.registerUserData)
+      .pipe(takeUntil(this.unsubscribeAll))
+      .subscribe(
+        (res) => {
+          localStorage.setItem('token', res.token);
+          this.successMsg = 'Registration successful';
+          this.registForm.reset();
+          this.route.navigate(['']);
+        },
+        (error) => (this.errorMsg = error.error),
+      );
   }
 
   ngOnDestroy(): void {
