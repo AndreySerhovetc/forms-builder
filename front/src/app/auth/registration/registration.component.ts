@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { AuthService } from '../../shared/services/auth-service/auth.service';
+import { TokenInterface } from 'src/app/shared/interfaces/token';
 
 @Component({
   selector: 'app-registration',
@@ -16,6 +17,8 @@ export class RegistrationComponent implements OnInit, OnDestroy {
   public successMsg = '';
 
   public errorMsg = '';
+
+  public fieldTextType: boolean = false;
 
   public registerUserData = {
     email: '',
@@ -58,14 +61,18 @@ export class RegistrationComponent implements OnInit, OnDestroy {
       .registerUser(this.registerUserData)
       .pipe(takeUntil(this.unsubscribeAll))
       .subscribe(
-        (res) => {
-          localStorage.setItem('token', res.token);
+        (res: TokenInterface) => {
+          localStorage.setItem('token', res.token!);
           this.successMsg = 'Registration successful';
           this.registForm.reset();
           this.route.navigate(['']);
         },
         (error) => (this.errorMsg = error.error),
       );
+  }
+
+  toggleFieldTextType() {
+    this.fieldTextType = !this.fieldTextType;
   }
 
   ngOnDestroy(): void {

@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthService } from './shared/services/auth-service/auth.service';
 import { TokenInterceptorService } from './shared/services/token-service/token-interceptor.service';
+import { AuthGuard } from './shared/guard/auth.guard';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,6 +25,7 @@ import { TokenInterceptorService } from './shared/services/token-service/token-i
       useClass: TokenInterceptorService,
       multi: true,
     },
+    AuthGuard,
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],

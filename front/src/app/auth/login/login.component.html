@@ -46,12 +46,20 @@
       <div class="form-control">
         <label for="">
           <input
-            type="password"
+            [type]="fieldTextType ? 'text' : 'password'"
             class="registration__field"
             placeholder="Enter password"
             formControlName="password"
             name="password"
           >
+          <i
+            class="fa visible"
+            [ngClass]="{
+              'fa-eye-slash': !fieldTextType,
+              'fa-eye': fieldTextType
+            }"
+            (click)="toggleFieldTextType()"
+          ></i>
         </label>
         <div
           *ngIf="loginForm.get('password').invalid && loginForm.get('password').touched"

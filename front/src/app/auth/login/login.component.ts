@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { AuthService } from '../../shared/services/auth-service/auth.service';
+import { TokenInterface } from 'src/app/shared/interfaces/token';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -15,6 +16,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   public currentErr = '';
 
   public successMsg = '';
+
+  public fieldTextType: boolean = false;
 
   public loginUserData = {
     email: '',
@@ -58,8 +61,8 @@ export class LoginComponent implements OnInit, OnDestroy {
       .loginUser(this.loginUserData)
       .pipe(takeUntil(this.unsubscribeAll))
       .subscribe(
-        (res) => {
-          localStorage.setItem('token', res.token);
+        (res: TokenInterface) => {
+          localStorage.setItem('token', res.token!);
           this.successMsg = 'You successful logged in';
           this.route.navigate(['']);
         },
@@ -68,6 +71,10 @@ export class LoginComponent implements OnInit, OnDestroy {
           this.currentErr = err.error;
         },
       );
+  }
+
+  toggleFieldTextType() {
+    this.fieldTextType = !this.fieldTextType;
   }
 
   ngOnDestroy(): void {

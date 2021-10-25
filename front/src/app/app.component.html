@@ -1,9 +1,10 @@
 <header class="header">
-  <a [routerLink]="['/']" class="header__link">Builder</a>
+  <a [routerLink]="['/']" class="header__link">Form Builder</a>
   <nav>
     <ul class="nav-link">
       <li class="nav-link__item">
         <a
+          *ngIf="!authService.loggedIn()"
           [routerLink]="['/registration']"
           class="nav-link__btn"
           routerLinkActive="active"
@@ -13,11 +14,23 @@
       </li>
       <li class="nav-link__item">
         <a
+          *ngIf="!authService.loggedIn()"
           [routerLink]="['/login']"
           class="nav-link__btn"
           routerLinkActive="active"
         >
-          Sing-in
+          Login
+        </a>
+      </li>
+      <li class="nav-link__item">
+        <a
+          *ngIf="authService.loggedIn()"
+          [routerLink]="['/login']"
+          class="nav-link__btn"
+          routerLinkActive="active"
+          (click)="authService.logoutUser()"
+        >
+          Logout
         </a>
       </li>
     </ul>

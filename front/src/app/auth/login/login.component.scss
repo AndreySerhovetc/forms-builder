@@ -61,7 +61,9 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
+
   &-control {
+    position: relative;
     margin-bottom: 20px;
   }
 }
@@ -96,4 +98,13 @@
 .error {
   color: red;
   font-weight: bold;
+}
+
+
+.visible {
+  position: absolute;
+  top: 14px;
+  right: 10px;
+  display: block;
+  cursor: pointer;
 }
