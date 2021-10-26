@@ -73,7 +73,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       );
   }
 
-  toggleFieldTextType() {
+  toggleFieldTextType(): void {
     this.fieldTextType = !this.fieldTextType;
   }
 

@@ -71,7 +71,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
       );
   }
 
-  toggleFieldTextType() {
+  toggleFieldTextType(): void {
     this.fieldTextType = !this.fieldTextType;
   }
 
