@@ -1,0 +1,37 @@
+<header class="header">
+  <a [routerLink]="['/']" class="header__link">Form Builder</a>
+  <nav>
+    <ul class="nav-link">
+      <li class="nav-link__item">
+        <a
+          *ngIf="!checkUserIsAuth()"
+          [routerLink]="['/registration']"
+          class="nav-link__btn"
+          routerLinkActive="active"
+        >
+          Registration
+        </a>
+      </li>
+      <li class="nav-link__item">
+        <a
+          *ngIf="!checkUserIsAuth()"
+          [routerLink]="['/login']"
+          class="nav-link__btn"
+          routerLinkActive="active"
+        >
+          Login
+        </a>
+      </li>
+      <li class="nav-link__item">
+        <a
+          *ngIf="checkUserIsAuth()"
+          [routerLink]="['/login']"
+          class="nav-link__btn"
+          (click)="logoutUser()"
+        >
+          Logout
+        </a>
+      </li>
+    </ul>
+  </nav>
+</header>

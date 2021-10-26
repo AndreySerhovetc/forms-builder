@@ -5,29 +5,23 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { AuthService } from '../../shared/services/auth-service/auth.service';
 import { TokenInterface } from 'src/app/shared/interfaces/token';
+import { RegistrationService } from './registration.service';
 
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.scss'],
+  providers: [RegistrationService],
 })
 export class RegistrationComponent implements OnInit, OnDestroy {
   public registForm!: FormGroup;
-
   public successMsg = '';
-
   public errorMsg = '';
-
   public fieldTextType: boolean = false;
 
-  public registerUserData = {
-    email: '',
-    password: '',
-  };
+  private destroyAll: Subject<any> = new Subject<any>();
 
-  private unsubscribeAll: Subject<any> = new Subject<any>();
-
-  constructor(private auth: AuthService, private route: Router) {}
+  constructor(private registrationService: RegistrationService) {}
 
   ngOnInit(): void {
     this.registForm = new FormGroup({
@@ -38,8 +32,19 @@ export class RegistrationComponent implements OnInit, OnDestroy {
       ]),
     });
 
+    this.registrationService.success$
+      .pipe(takeUntil(this.destroyAll))
+      .subscribe((success) => (this.successMsg = success));
+
+    this.registrationService.error$
+      .pipe(takeUntil(this.destroyAll))
+      .subscribe((error) => {
+        this.errorMsg = error
+        this.registForm.reset()
+      });
+
     this.registForm.valueChanges
-      .pipe(takeUntil(this.unsubscribeAll))
+      .pipe(takeUntil(this.destroyAll))
       .subscribe(() => {
         if (this.errorMsg.length) this.errorMsg = '';
       });
@@ -49,26 +54,8 @@ export class RegistrationComponent implements OnInit, OnDestroy {
     if (this.registForm.valid) {
       const formData = { ...this.registForm.value };
 
-      this.registerUserData.email = formData.email;
-      this.registerUserData.password = formData.password;
-
-      this.registerUser();
+      this.registrationService.setUserData(formData);
     }
-  }
-
-  registerUser(): void {
-    this.auth
-      .registerUser(this.registerUserData)
-      .pipe(takeUntil(this.unsubscribeAll))
-      .subscribe(
-        (res: TokenInterface) => {
-          localStorage.setItem('token', res.token!);
-          this.successMsg = 'Registration successful';
-          this.registForm.reset();
-          this.route.navigate(['']);
-        },
-        (error) => (this.errorMsg = error.error),
-      );
   }
 
   toggleFieldTextType(): void {
@@ -76,7 +63,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.unsubscribeAll.next();
-    this.unsubscribeAll.complete();
+    this.destroyAll.next();
+    this.destroyAll.complete();
   }
 }

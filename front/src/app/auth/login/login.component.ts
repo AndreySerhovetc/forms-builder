@@ -5,28 +5,23 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { AuthService } from '../../shared/services/auth-service/auth.service';
 import { TokenInterface } from 'src/app/shared/interfaces/token';
+import { LoginModule } from './login.module';
+import { LoginService } from './login.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
+  providers: [LoginService],
 })
 export class LoginComponent implements OnInit, OnDestroy {
   public loginForm!: FormGroup;
-
   public currentErr = '';
-
   public successMsg = '';
-
   public fieldTextType: boolean = false;
 
-  public loginUserData = {
-    email: '',
-    password: '',
-  };
+  private destroyAll: Subject<any> = new Subject<any>();
 
-  private unsubscribeAll: Subject<any> = new Subject<any>();
-
-  constructor(private auth: AuthService, private route: Router) {}
+  constructor(private loginService: LoginService) {}
 
   ngOnInit(): void {
     this.loginForm = new FormGroup({
@@ -37,8 +32,16 @@ export class LoginComponent implements OnInit, OnDestroy {
       ]),
     });
 
+    this.loginService.error$
+      .pipe(takeUntil(this.destroyAll))
+      .subscribe((error) => (this.currentErr = error));
+
+    this.loginService.success$
+      .pipe(takeUntil(this.destroyAll))
+      .subscribe((success) => (this.successMsg = success));
+
     this.loginForm.valueChanges
-      .pipe(takeUntil(this.unsubscribeAll))
+      .pipe(takeUntil(this.destroyAll))
       .subscribe(() => {
         if (this.currentErr.length) this.currentErr = '';
         if (this.successMsg.length) this.successMsg = '';
@@ -49,28 +52,8 @@ export class LoginComponent implements OnInit, OnDestroy {
     if (this.loginForm.valid) {
       const formData = { ...this.loginForm.value };
 
-      this.loginUserData.email = formData.email;
-      this.loginUserData.password = formData.password;
-
-      this.loginUser();
+      this.loginService.setUserData(formData);
     }
-  }
-
-  loginUser(): void {
-    this.auth
-      .loginUser(this.loginUserData)
-      .pipe(takeUntil(this.unsubscribeAll))
-      .subscribe(
-        (res: TokenInterface) => {
-          localStorage.setItem('token', res.token!);
-          this.successMsg = 'You successful logged in';
-          this.route.navigate(['']);
-        },
-        (err) => {
-          this.loginForm.get('password')?.setValue('');
-          this.currentErr = err.error;
-        },
-      );
   }
 
   toggleFieldTextType(): void {
@@ -78,7 +61,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.unsubscribeAll.next();
-    this.unsubscribeAll.complete();
+    this.destroyAll.next();
+    this.destroyAll.complete();
   }
 }

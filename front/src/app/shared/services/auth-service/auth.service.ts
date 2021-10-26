@@ -11,7 +11,6 @@ import { Router } from '@angular/router';
 
 export class AuthService {
   private registerUrl = 'http://localhost:3000/api/register';
-
   private loginUrl = 'http://localhost:3000/api/login';
 
   constructor(private http: HttpClient, private router: Router) {}
@@ -24,12 +23,12 @@ export class AuthService {
     return this.http.post(this.loginUrl, user);
   }
 
-  logoutUser() {
+  removeUserCredentials() {
     localStorage.removeItem('token');
     this.router.navigate(['/login']);
   }
 
-  loggedIn() {
+  checkUserCredentials(): boolean {
     return !!localStorage.getItem('token');
   }
 

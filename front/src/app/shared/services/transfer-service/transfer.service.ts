@@ -7,13 +7,11 @@ import { Element } from '../../interfaces/element';
 })
 export class TransferService {
   public selectedElement$ = new Subject<Element>();
-
   public deleteId$ = new Subject<number>();
 
   public changeSelectElement(element: Element): void {
     this.selectedElement$.next(element);
   }
-
   public deleteElementId(id: number): void {
     this.deleteId$.next(id);
   }

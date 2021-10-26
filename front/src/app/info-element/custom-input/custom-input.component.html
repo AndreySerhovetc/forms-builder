@@ -1,4 +1,4 @@
-<div *ngFor="let type of keys() | keyvalue">
+<div *ngFor="let type of keysInputType() | keyvalue">
   <input
     *ngIf="key === type.value"
     class="custom-input__text"

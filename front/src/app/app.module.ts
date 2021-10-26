@@ -8,9 +8,12 @@ import { AppComponent } from './app.component';
 import { AuthService } from './shared/services/auth-service/auth.service';
 import { TokenInterceptorService } from './shared/services/token-service/token-interceptor.service';
 import { AuthGuard } from './shared/guard/auth.guard';
+import { HeaderComponent } from './header/header.component';
+
 @NgModule({
   declarations: [
     AppComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,

@@ -2,49 +2,44 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 import { Element } from '../shared/interfaces/element';
 import { ShareService } from '../shared/services/shared-service/share.service';
 import { TransferService } from '../shared/services/transfer-service/transfer.service';
 import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-drop-field',
   templateUrl: './drop-field.component.html',
-  styleUrls: ['./drop-field.component.scss'],
+  styleUrls: ['./drop-field.component.scss']
 })
 export class DropFieldComponent implements OnInit, OnDestroy {
   public dropElements: Element[] = [];
-
   public currentElement?: Element;
-
   public deleteId?: number;
-
   public dialogRef?: MatDialogRef<ConfirmModalComponent>;
-
-  private unsubscribeAll: Subject<any> = new Subject<any>();
-
+  private destroyAll: Subject<any> = new Subject<any>();
 
   constructor(
     private share: ShareService,
     private transfer: TransferService,
-    public dialog: MatDialog,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
     this.transfer.selectedElement$
-      .pipe(takeUntil(this.unsubscribeAll))
+      .pipe(takeUntil(this.destroyAll))
       .subscribe(res => this.currentElement = res);
   }
 
   onSelected(element: Element): void {
-    this.transfer.changeSelectElement(element);
+    this.transfer.changeSelectElement(element)
     this.deleteId = element.id;
   }
 
   deleteElement(id: number): void {
     this.dropElements = this.dropElements.filter(
-      (item: Element) => item.id !== id,
+      (item: Element) => item.id !== id
     );
   }
 
@@ -63,7 +58,7 @@ export class DropFieldComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.unsubscribeAll.next();
-    this.unsubscribeAll.complete();
+    this.destroyAll.next();
+    this.destroyAll.complete();
   }
 }

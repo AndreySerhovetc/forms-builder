@@ -13,8 +13,7 @@ import { ElementService } from '../shared/services/element-service/element.servi
 })
 export class ElementsListComponent implements OnInit, OnDestroy {
   public elements: Element[] = [];
-
-  private unsubscribeAll: Subject<any> = new Subject<any>();
+  private destroyAll: Subject<any> = new Subject<any>();
 
   constructor(
     private elementService: ElementService,
@@ -24,8 +23,8 @@ export class ElementsListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.elementService
       .getElements()
-      .pipe(takeUntil(this.unsubscribeAll))
-      .subscribe((res) => (this.elements = res));
+      .pipe(takeUntil(this.destroyAll))
+      .subscribe(res => (this.elements = res));
   }
 
   onDrop(event: CdkDragDrop<Element[]>): void {
@@ -33,7 +32,7 @@ export class ElementsListComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.unsubscribeAll.next();
-    this.unsubscribeAll.complete();
+    this.destroyAll.next();
+    this.destroyAll.complete();
   }
 }

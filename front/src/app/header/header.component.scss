@@ -1,0 +1,47 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  background-color: #fef2e4;
+  box-shadow: 0px 4px 8px 0px rgba(34, 60, 80, 0.2);
+}
+
+.header__link {
+  font-size: 40px;
+  color: #fd974f;
+}
+
+.nav-link {
+  display: flex;
+  list-style: none;
+
+  &__item {
+    margin-right: 30px;
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  &__btn {
+    margin-right: 30px;
+    font-size: 16px;
+    background-color: transparent;
+    border: none;
+    color: #c60000;
+    cursor: pointer;
+    transition: color .3s ease;
+
+    &:hover {
+      color: darken(#c60000, 15%);
+    }
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+
+.active {
+  color:black;
+}
