@@ -25,7 +25,7 @@ export const Elements: Element[] = [
       fontSize: '16px',
       fontWeight: 'normal',
       color: '#000',
-      required: false,
+      required: true,
       placeholder: 'Enter your text',
       label: 'Text Area',
     },

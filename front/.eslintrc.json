@@ -33,8 +33,13 @@
           {
             "type": "element",
             "prefix": "app",
-            "style": "kebab-case",
-            "lines-between-class-members": "off"
+            "style": "kebab-case"
+          }
+        ],
+        "@typescript-eslint/lines-between-class-members": [
+          "error",
+          {
+            "exceptAfterOverload": true
           }
         ]
       }

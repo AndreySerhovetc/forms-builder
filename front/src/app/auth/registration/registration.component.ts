@@ -36,8 +36,8 @@ export class RegistrationComponent implements OnInit, OnDestroy {
     this.registrationService.error$
       .pipe(takeUntil(this.destroyAll))
       .subscribe((error) => {
-        this.errorMsg = error
-        this.registForm.reset()
+        this.errorMsg = error;
+        this.registForm.reset();
       });
 
     this.registForm.valueChanges

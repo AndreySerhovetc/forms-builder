@@ -22,7 +22,7 @@ export class CustomInputComponent implements OnInit, OnDestroy {
   @Input() value: string | boolean = '';
   @Output() valueChange = new EventEmitter<any>();
 
-  public newKeyValue!: {key: string, value: string | boolean};
+  public newKeyValue!: { key: string, value: string | boolean };
   private destroyAll: Subject<any> = new Subject<any>();
 
   constructor(private customService: CustomInputService) {}
@@ -33,7 +33,7 @@ export class CustomInputComponent implements OnInit, OnDestroy {
       .subscribe((res) => (this.newKeyValue = res));
   }
 
-  onChange(event: Event) {
+  onChange(event: Event): void {
     this.customService.changeElementStyle(event, this.key);
     this.valueChange.emit(this.newKeyValue);
   }

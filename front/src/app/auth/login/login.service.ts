@@ -33,7 +33,7 @@ export class LoginService {
       },
       (err) => {
         this.error$.next(err.error);
-      }
+      },
     );
   }
 }

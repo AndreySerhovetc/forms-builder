@@ -5,9 +5,7 @@ import { Subject } from 'rxjs';
   providedIn: 'root',
 })
 export class CustomInputService {
-  public changedKeyValue$ = new Subject<{key: string, value: string | boolean}>();
-
-  constructor() {}
+  public changedKeyValue$ = new Subject<{ key: string, value: string | boolean }>();
 
   changeElementStyle(event: Event, key: string) {
     let newValue: string | boolean;

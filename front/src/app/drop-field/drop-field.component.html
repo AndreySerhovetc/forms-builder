@@ -32,6 +32,7 @@
 
       <label *ngIf="item.name === 'Textarea'">
         {{item.style.label}}
+        <span [ngClass]="item.style.required === true ? 'required' : ''"></span>
          <textarea
           cols="30"
           rows="40"

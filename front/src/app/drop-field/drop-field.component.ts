@@ -7,23 +7,26 @@ import { Element } from '../shared/interfaces/element';
 import { ShareService } from '../shared/services/shared-service/share.service';
 import { TransferService } from '../shared/services/transfer-service/transfer.service';
 import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
+import { DropFieldService } from './drop-field.service';
 
 @Component({
   selector: 'app-drop-field',
   templateUrl: './drop-field.component.html',
   styleUrls: ['./drop-field.component.scss'],
+  providers: [DropFieldService],
 })
 export class DropFieldComponent implements OnInit, OnDestroy {
   public dropElements: Element[] = [];
   public currentElement?: Element;
-  public deleteId?: number;
+  public deleteId?: number = 0;
   public dialogRef?: MatDialogRef<ConfirmModalComponent>;
   private destroyAll: Subject<any> = new Subject<any>();
 
   constructor(
     private share: ShareService,
     private transfer: TransferService,
-    public dialog: MatDialog
+    private dialog: MatDialog,
+    private dropService: DropFieldService,
   ) {}
 
   ngOnInit(): void {
@@ -37,10 +40,8 @@ export class DropFieldComponent implements OnInit, OnDestroy {
     this.deleteId = element.id;
   }
 
-  deleteElement(id: number): void {
-    this.dropElements = this.dropElements.filter(
-      (item: Element) => item.id !== id
-    );
+  deleteElement(id: number) {
+    this.dropElements = this.dropService.filterDropList(this.dropElements, id);
   }
 
   onDrop(event: CdkDragDrop<Element[]>): void {

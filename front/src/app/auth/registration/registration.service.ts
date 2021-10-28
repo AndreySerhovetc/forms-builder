@@ -19,9 +19,9 @@ export class RegistrationService {
 
   constructor(private auth: AuthService, private router: Router) {}
 
-  setUserData(loginData: { email: string; password: string }): void {
-    this.registerUserData.email = loginData.email;
-    this.registerUserData.password = loginData.password;
+  setUserData(registerData: { email: string; password: string }): void {
+    this.registerUserData.email = registerData.email;
+    this.registerUserData.password = registerData.password;
 
     this.registerUser();
   }
@@ -33,7 +33,7 @@ export class RegistrationService {
         this.success$.next('Registration successful');
         this.router.navigate(['']);
       },
-      (error) => this.error$.next(error.error)
+      (error) => this.error$.next(error.error),
     );
   }
 }

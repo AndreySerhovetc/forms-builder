@@ -28,7 +28,7 @@ export class InfoElementComponent implements OnInit, OnDestroy {
     this.transfer.deleteId$
       .pipe(takeUntil(this.destroyAll))
       .subscribe((id) => {
-        this.hideInfo(id);
+        this.hideInfoBlock(id);
       });
   }
 
@@ -41,7 +41,7 @@ export class InfoElementComponent implements OnInit, OnDestroy {
     }
   }
 
-  hideInfo(id: number): void {
+  hideInfoBlock(id: number): void {
     if (this.currentElement?.id === id) {
       this.currentElement = null;
     }
