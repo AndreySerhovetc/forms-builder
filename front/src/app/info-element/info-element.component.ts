@@ -3,6 +3,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { TransferService } from '../shared/services/transfer-service/transfer.service';
 import { Element, Style } from '../shared/interfaces/element';
+import { items } from './constants/const';
 
 @Component({
   selector: 'app-info-element',
@@ -12,7 +13,7 @@ import { Element, Style } from '../shared/interfaces/element';
 export class InfoElementComponent implements OnInit, OnDestroy {
   public currentElement!: Element | null;
   public styleObject!: Partial<Style>;
-  public items = ['Info', 'Change element'];
+  public accordionItem: string[] = items;
   private destroyAll: Subject<any> = new Subject<any>();
 
   constructor(private transfer: TransferService) {}

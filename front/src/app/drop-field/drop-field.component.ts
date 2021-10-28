@@ -2,16 +2,16 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { Element } from '../shared/interfaces/element';
 import { ShareService } from '../shared/services/shared-service/share.service';
 import { TransferService } from '../shared/services/transfer-service/transfer.service';
 import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
-import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-drop-field',
   templateUrl: './drop-field.component.html',
-  styleUrls: ['./drop-field.component.scss']
+  styleUrls: ['./drop-field.component.scss'],
 })
 export class DropFieldComponent implements OnInit, OnDestroy {
   public dropElements: Element[] = [];
@@ -29,11 +29,11 @@ export class DropFieldComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.transfer.selectedElement$
       .pipe(takeUntil(this.destroyAll))
-      .subscribe(res => this.currentElement = res);
+      .subscribe((res) => (this.currentElement = res));
   }
 
   onSelected(element: Element): void {
-    this.transfer.changeSelectElement(element)
+    this.transfer.changeSelectElement(element);
     this.deleteId = element.id;
   }
 

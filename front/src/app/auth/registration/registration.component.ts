@@ -1,10 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { AuthService } from '../../shared/services/auth-service/auth.service';
-import { TokenInterface } from 'src/app/shared/interfaces/token';
 import { RegistrationService } from './registration.service';
 
 @Component({

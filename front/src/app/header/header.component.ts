@@ -14,7 +14,7 @@ export class HeaderComponent {
     this.authService.removeUserCredentials();
   }
 
-  checkUserIsAuth() {
+  checkUserIsAuth(): boolean {
     return this.authService.checkUserCredentials();
   }
 }

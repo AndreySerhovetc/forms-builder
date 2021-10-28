@@ -1,11 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { AuthService } from '../../shared/services/auth-service/auth.service';
-import { TokenInterface } from 'src/app/shared/interfaces/token';
-import { LoginModule } from './login.module';
 import { LoginService } from './login.service';
 @Component({
   selector: 'app-login',

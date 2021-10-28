@@ -3,7 +3,7 @@
   <h2>{{currentElement.name }} {{currentElement.id }} Details</h2>
   <cdk-accordion class="example-accordion">
     <cdk-accordion-item
-      *ngFor="let item of items; let index = index;"
+      *ngFor="let item of accordionItem; let index = index;"
       #accordionItem="cdkAccordionItem"
       class="example-accordion-item"
       role="button"
