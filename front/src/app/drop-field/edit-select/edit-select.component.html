@@ -1,0 +1,18 @@
+<h1 mat-dialog-title>Add new option in select</h1>
+<div mat-dialog-actions class="edit-dialog">
+  <mat-form-field appearance="fill" class="edit-dialog-select">
+    <mat-label>Select</mat-label>
+    <select class="" matNativeControl required>
+      <option value="volvo">Volvo</option>
+    </select>
+  </mat-form-field>
+  <div class="edit-dialog-btn">
+    <button class="btn mr-15" (click)="dialogRef.close(true)" color="primary">
+      Save
+    </button>
+    <button class="btn" (click)="dialogRef.close(false)">
+      Cancel
+    </button>
+  </div>
+</div>
+

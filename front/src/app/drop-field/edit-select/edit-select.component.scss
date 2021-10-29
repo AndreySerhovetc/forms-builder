@@ -1,0 +1,11 @@
+.edit-dialog {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  &-select {
+   display: flex;
+   flex-direction: column;
+   margin-bottom: 20px;
+  }
+}
