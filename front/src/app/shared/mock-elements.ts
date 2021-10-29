@@ -12,6 +12,7 @@ export const Elements: Element[] = [
       fontWeight: 'normal',
       color: '#0f0f0f',
       backgroundColor: '#fff',
+      value: 'Button',
     },
   },
 
@@ -68,5 +69,11 @@ export const Elements: Element[] = [
       fontWeight: 'normal',
       color: '#000',
     },
+    values: [
+      {
+        label: 'Option 1',
+        value: 'option-1',
+      },
+    ],
   },
 ];

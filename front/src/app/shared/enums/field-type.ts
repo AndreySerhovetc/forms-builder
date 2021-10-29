@@ -5,4 +5,5 @@ export enum FieldTypes {
   border = 'border',
   placeholder = 'placeholder',
   label = 'label',
+  value = 'value',
 }

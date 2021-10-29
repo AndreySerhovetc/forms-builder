@@ -2,9 +2,12 @@ export interface Element {
   id?: number;
   name?: string;
   style?: Partial<Style>;
-  values?: {
-    option?: string;
-  };
+  values?: [
+    {
+      label: string;
+      value: string;
+    },
+  ];
 }
 
 interface IObjectKeys {
@@ -21,4 +24,5 @@ export interface Style extends IObjectKeys {
   color: string;
   backgroundColor: string;
   label: string;
+  value: string;
 }

@@ -13,6 +13,17 @@ mongoose.connect(db, err => {
   }
 })
 
+// const tokenAuth = (req, res, next) => {
+//   const token = req.headers.authorization.split(' ')[1];
+//   try {
+//    req.tokenData = jwt.verify(token, 'secretKey')
+//    next()
+//   } catch (err) {
+//     return res.status(401).send('There is no user')
+//   }
+// }
+
+
 router.get('/', verifyToken, (req, res) => {
   res.send('From API route')
 })
@@ -53,7 +64,7 @@ router.post('/register', (req, res) => {
     })
 })
 
-router.post('/login', (req, res) => {
+router.post('/login', tokenAuth, (req, res) => {
   let userData = req.body;
 
   User.findOne({email: userData.email}, (error, user) => {
