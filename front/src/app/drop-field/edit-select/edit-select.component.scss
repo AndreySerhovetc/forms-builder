@@ -3,9 +3,31 @@
   flex-direction: column;
   justify-content: center;
 
-  &-select {
+  &-form {
    display: flex;
    flex-direction: column;
    margin-bottom: 20px;
+
+   &__select {
+     height: 30px;
+     margin-bottom: 30px;
+   }
+  } 
+
+  &-btn {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.fieldset {
+  padding: 10px;
+
+  &__input {
+    height: 30px;
+
+    &:last-child {
+      margin-right: 0;
+    }
   }
 }

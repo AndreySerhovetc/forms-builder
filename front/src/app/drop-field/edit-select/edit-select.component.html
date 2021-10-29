@@ -1,10 +1,41 @@
 <h1 mat-dialog-title>Add new option in select</h1>
 <div mat-dialog-actions class="edit-dialog">
-  <mat-form-field appearance="fill" class="edit-dialog-select">
+  <mat-form-field appearance="fill" class="edit-dialog-form">
     <mat-label>Select</mat-label>
-    <select class="" matNativeControl required>
-      <option value="volvo">Volvo</option>
+    <ng-container *ngFor="let option of select.values" >
+      <select
+      class="edit-dialog-form__select"
+      matNativeControl
+      required
+    >
+      <option value="{{option.value}}">{{option.label}}</option>
     </select>
+    </ng-container>
+    <fieldset class="fieldset">
+      <legend>Add new option</legend>
+      <form [formGroup]="addOptionForm" (ngSubmit)="onSubmit()">
+        <label>
+          Label
+          <input
+            class="fieldset__input"
+            type="text"
+            placeholder="Option 1"
+            formControlName="label"
+            name="label"
+          >
+        </label>
+        <label>
+          Value
+          <input
+            class="fieldset__input"
+            type="text"
+            placeholder="option-1"
+            formControlName="value"
+            name="value"
+          >
+        </label>
+      </form>
+    </fieldset>
   </mat-form-field>
   <div class="edit-dialog-btn">
     <button class="btn mr-15" (click)="dialogRef.close(true)" color="primary">
