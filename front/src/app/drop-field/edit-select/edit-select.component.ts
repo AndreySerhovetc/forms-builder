@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Optional } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
@@ -19,7 +19,7 @@ export class EditSelectComponent implements OnInit, OnDestroy {
   private destroyAll: Subject<any> = new Subject<any>();
 
   constructor(
-    public dialogRef: MatDialogRef<EditSelectComponent>,
+    @Optional() public dialogRef: MatDialogRef<EditSelectComponent>,
     private transfer: TransferService,
   ) {}
  
@@ -38,8 +38,8 @@ export class EditSelectComponent implements OnInit, OnDestroy {
   onSubmit(): void {
     if (this.addOptionForm.valid) {
       const formData = { ...this.addOptionForm.value };
-
       console.log(formData);
+      
     }
   }
   

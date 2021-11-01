@@ -13,6 +13,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   public loginForm!: FormGroup;
   public currentErr = '';
   public successMsg = '';
+  public submitted: boolean = false;
   public fieldTextType: boolean = false;
 
   private destroyAll: Subject<any> = new Subject<any>();

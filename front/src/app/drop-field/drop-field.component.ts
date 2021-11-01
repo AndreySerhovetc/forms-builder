@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, Optional } from '@angular/core';
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Subject } from 'rxjs';
@@ -27,7 +27,7 @@ export class DropFieldComponent implements OnInit, OnDestroy {
   constructor(
     private share: ShareService,
     private transfer: TransferService,
-    private dialog: MatDialog,
+    @Optional() private dialog: MatDialog,
     private dropService: DropFieldService,
   ) {}
 
