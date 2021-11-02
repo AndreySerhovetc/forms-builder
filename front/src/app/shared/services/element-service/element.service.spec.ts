@@ -1,5 +1,4 @@
 import { TestBed } from '@angular/core/testing';
-
 import { ElementService } from './element.service';
 
 describe('ElementService', () => {
@@ -8,6 +7,7 @@ describe('ElementService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({});
     service = TestBed.inject(ElementService);
+    service = new ElementService();
   });
 
   it('should be created', () => {

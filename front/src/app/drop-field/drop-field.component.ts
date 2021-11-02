@@ -22,7 +22,7 @@ export class DropFieldComponent implements OnInit, OnDestroy {
   public deleteId?: number = 0;
   public dialogRef?: MatDialogRef<ConfirmModalComponent>;
   public dialogSelectRef?: MatDialogRef<EditSelectComponent>;
-  private destroyAll: Subject<any> = new Subject<any>();
+  private destroyAll$: Subject<any> = new Subject<any>();
 
   constructor(
     private share: ShareService,
@@ -33,7 +33,7 @@ export class DropFieldComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.transfer.selectedElement$
-      .pipe(takeUntil(this.destroyAll))
+      .pipe(takeUntil(this.destroyAll$))
       .subscribe((res) => (this.currentElement = res));
   }
 
@@ -68,7 +68,7 @@ export class DropFieldComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.destroyAll.next();
-    this.destroyAll.complete();
+    this.destroyAll$.next();
+    this.destroyAll$.complete();
   }
 }

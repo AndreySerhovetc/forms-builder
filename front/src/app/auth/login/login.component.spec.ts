@@ -36,6 +36,11 @@ describe('LoginComponent', () => {
     expect(module).toBeTruthy();
   });
 
+  it('should create form with 2 input', () => {
+    expect(component.loginForm.contains('email')).toBeTruthy();
+    expect(component.loginForm.contains('password')).toBeTruthy();
+  });
+
   it('form invalid when empty', () => {
     component.loginForm.controls.email.setValue('');
     component.loginForm.controls.password.setValue('');
@@ -44,45 +49,27 @@ describe('LoginComponent', () => {
 
   it('passoword field should be required', () => {
     const password = component.loginForm.controls.password;
-    expect(password.valid).toBeFalsy();
-
     password.setValue('');
     expect(password.hasError('required')).toBeTruthy();
   });
 
   it('Password length must be at least 6 characters', () => {
     const password = component.loginForm.controls.email;
-    expect(password.valid).toBeFalsy();
-
     password.setValue('1234');
     expect(password.valid).toBeFalsy();
   });
 
   it('email field should be required', () => {
     const email = component.loginForm.controls.email;
-    expect(email.valid).toBeFalsy();
-
     email.setValue('');
     expect(email.hasError('required')).toBeTruthy();
   });
 
   it('email field incorrect', () => {
     const email = component.loginForm.controls.email;
-    expect(email.valid).toBeFalsy();
-
     email.setValue('test@');
     expect(email.valid).toBeFalsy();
   });
-
-
-  // it('Should be call onSubmit method', fakeAsync(() => {
-  //   fixture.detectChanges();
-  //   spyOn(component, 'onSubmit');
-  //   let el = fixture.debugElement.query(By.css('btn')).nativeElement;
-  //   el.click();
-  //   tick();
-  //   expect(component.onSubmit).toHaveBeenCalled();
-  // }));
 
   it('form should be valid', () => {
     component.loginForm.controls.email.setValue('test@uuu.com');

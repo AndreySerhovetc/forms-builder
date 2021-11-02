@@ -1,13 +1,13 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-
 import { RegistrationComponent } from './registration.component';
 import { RegistrationModule } from './registration.module';
 
 describe('RegistrationComponent', () => {
   let component: RegistrationComponent;
   let fixture: ComponentFixture<RegistrationComponent>;
+
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -36,6 +36,11 @@ describe('RegistrationComponent', () => {
     expect(module).toBeTruthy();
   });
 
+  it('should create form with 2 input', () => {
+    expect(component.registForm.contains('email')).toBeTruthy();
+    expect(component.registForm.contains('password')).toBeTruthy();
+  });
+
   it('form invalid when empty', () => {
     component.registForm.controls.email.setValue('');
     component.registForm.controls.password.setValue('');
@@ -44,32 +49,24 @@ describe('RegistrationComponent', () => {
 
   it('password field should be required', () => {
     const password = component.registForm.controls.password;
-    expect(password.valid).toBeFalsy();
-
     password.setValue('');
     expect(password.hasError('required')).toBeTruthy();
   });
 
   it('email field should be required', () => {
     const email = component.registForm.controls.email;
-    expect(email.valid).toBeFalsy();
-
     email.setValue('');
     expect(email.hasError('required')).toBeTruthy();
   });
 
   it('email field incorrect', () => {
     const email = component.registForm.controls.email;
-    expect(email.valid).toBeFalsy();
-
     email.setValue('test@');
     expect(email.valid).toBeFalsy();
   });
 
   it('Password lenght must be at least 6 characters', () => {
     const password = component.registForm.controls.password;
-    expect(password.valid).toBeFalsy();
-
     password.setValue('1234');
     expect(password.valid).toBeFalsy();
   });
