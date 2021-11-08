@@ -36,9 +36,8 @@ describe('HeaderComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  // it('should call checkUserIsAuth after work logout', () => {
-  //   const result = authService.checkUserCredentials();
-  //   component.logoutUser();
-  //   expect(result).toBeTruthy();
-  // });
+  it('should call checkUserIsAuth after work logout', () => {
+    const result = authService.checkUserCredentials();
+    expect(result).toBeFalse();
+  });
 });

@@ -27,4 +27,11 @@ describe('InfoElementComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should return null if id equel current elment id', () => {
+    let id = 10;
+
+    const result = component.hideInfoBlock(id);
+    expect(result).toBeUndefined();
+  });
 });

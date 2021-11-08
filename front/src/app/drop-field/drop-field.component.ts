@@ -8,7 +8,6 @@ import { ShareService } from '../shared/services/shared-service/share.service';
 import { TransferService } from '../shared/services/transfer-service/transfer.service';
 import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
 import { DropFieldService } from './drop-field.service';
-import { EditSelectComponent } from './edit-select/edit-select.component';
 
 @Component({
   selector: 'app-drop-field',
@@ -21,7 +20,6 @@ export class DropFieldComponent implements OnInit, OnDestroy {
   public currentElement?: Element;
   public deleteId?: number = 0;
   public dialogRef?: MatDialogRef<ConfirmModalComponent>;
-  public dialogSelectRef?: MatDialogRef<EditSelectComponent>;
   private destroyAll$: Subject<any> = new Subject<any>();
 
   constructor(
@@ -60,12 +58,7 @@ export class DropFieldComponent implements OnInit, OnDestroy {
     });
   }
 
-  editSelectOption(): void {
-    this.dialogSelectRef = this.dialog.open(EditSelectComponent);
-    this.dialogSelectRef.afterClosed().subscribe((result) => {
-      console.log(result);
-    });
-  }
+
 
   ngOnDestroy(): void {
     this.destroyAll$.next();
